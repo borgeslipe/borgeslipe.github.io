@@ -16,3 +16,34 @@ collections:
         fields:
           - { label: "Título", name: "titulo", widget: "string" }
           - { label: "Texto", name: "texto", widget: "text" }
+
+      - name: "noticias"
+        label: "Notícias"
+        file: "content/noticias.json"
+        fields:
+          - label: "Notícias"
+            label_singular: "Notícia"
+            name: "itens"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Texto", name: "texto", widget: "text" }
+              - { label: "Imagem", name: "imagem", widget: "image", required: false }
+              - { label: "Link (opcional)", name: "link", widget: "string", required: false }
+
+      - name: "projetos"
+        label: "Projetos"
+        file: "content/projetos.json"
+        fields:
+          - label: "Projetos"
+            label_singular: "Projeto"
+            name: "itens"
+            widget: "list"
+            summary: "{{fields.nome}}"
+            fields:
+              - { label: "Nome do projeto", name: "nome", widget: "string" }
+              - { label: "Resumo (aparece no cartão)", name: "resumo", widget: "text" }
+              - { label: "Texto completo (página do projeto)", name: "texto", widget: "text" }
+              - { label: "Imagem", name: "imagem", widget: "image", required: false }
