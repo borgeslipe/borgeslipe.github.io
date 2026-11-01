@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projeto | BORGESSFUT</title>
+  <link rel="icon" href="logo,png.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="marca">
+      <img src="logo,png.png" alt="Logo BORGESSFUT">
+      <span>BORGESSFUT</span>
+    </a>
+    <nav>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#noticias">Notícias</a>
+      <a href="index.html#projetos">Projetos</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main class="pagina" id="conteudo">
+    <a href="index.html#projetos" class="voltar">← Voltar aos projetos</a>
+  </main>
+
+  <footer>© BORGESSFUT</footer>
+
+  <script>
+    function slug(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+    var alvo = new URLSearchParams(location.search).get('p');
+    var main = document.getElementById('conteudo');
+
+    fetch('content/projetos.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var p = (d.itens || []).find(function (x) { return slug(x.nome) === alvo; });
+        if (!p) { main.appendChild(el('p', '', 'Projeto não encontrado.')); return; }
+        document.title = p.nome + ' | BORGESSFUT';
+        main.appendChild(el('h1', '', p.nome));
+        if (p.imagem) { var im = el('img'); im.src = p.imagem; im.alt = p.nome; main.appendChild(im); }
+        main.appendChild(el('div', 'texto', p.texto));
+      })
+      .catch(function () { main.appendChild(el('p', '', 'Não foi possível carregar o projeto.')); });
+  </script>
+</body>
+</html>
