@@ -1,11 +1,9 @@
 {
   "itens": [
     {
-      "titulo": "Primeira notícia",
-      "data": "2026-10-28",
-      "texto": "Escreva aqui o texto da notícia.",
-      "imagem": "",
-      "link": ""
+      "titulo": "Notícia Teste",
+      "texto": "Texto teste",
+      "data": "2026-11-01"
     }
   ]
 }
