@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projetos | BORGESSFUT</title>
+  <link rel="icon" href="logo,png.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div id="cabecalho"></div>
+
+  <main class="pagina larga">
+    <h1>Projetos</h1>
+    <div class="cards" id="lista-projetos"></div>
+  </main>
+
+  <div id="rodape"></div>
+  <script src="site.js"></script>
+  <script>
+    function slug(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+
+    fetch('content/projetos.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var lista = document.getElementById('lista-projetos');
+        var itens = d.itens || [];
+        if (!itens.length) { lista.appendChild(el('p', 'vazio', 'Nenhum projeto publicado ainda.')); return; }
+        itens.forEach(function (p) {
+          var c = el('div', 'card');
+          if (p.imagem) { var im = el('img'); im.src = p.imagem; im.alt = p.nome; c.appendChild(im); }
+          c.appendChild(el('h3', '', p.nome));
+          c.appendChild(el('p', '', p.resumo));
+          var a = el('a', 'mais', 'Ver projeto →');
+          a.href = 'projeto.html?p=' + slug(p.nome);
+          c.appendChild(a);
+          lista.appendChild(c);
+        });
+      })
+      .catch(function () {
+        document.getElementById('lista-projetos').appendChild(el('p', 'vazio', 'Não foi possível carregar os projetos.'));
+      });
+  </script>
+</body>
+</html>
