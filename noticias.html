@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notícias | BORGESSFUT</title>
+  <link rel="icon" href="logo,png.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div id="cabecalho"></div>
+
+  <main class="pagina larga">
+    <h1>Notícias</h1>
+    <div class="cards" id="lista-noticias"></div>
+  </main>
+
+  <div id="rodape"></div>
+  <script src="site.js"></script>
+  <script>
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+    function dataBR(s) {
+      var p = (s || '').slice(0, 10).split('-');
+      return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : '';
+    }
+
+    fetch('content/noticias.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var lista = document.getElementById('lista-noticias');
+        var itens = (d.itens || []).slice().sort(function (a, b) {
+          return (b.data || '').localeCompare(a.data || '');
+        });
+        if (!itens.length) { lista.appendChild(el('p', 'vazio', 'Nenhuma notícia publicada ainda.')); return; }
+        itens.forEach(function (n) {
+          var c = el('div', 'card');
+          if (n.imagem) { var im = el('img'); im.src = n.imagem; im.alt = n.titulo; c.appendChild(im); }
+          if (n.data) c.appendChild(el('p', 'data', dataBR(n.data)));
+          c.appendChild(el('h3', '', n.titulo));
+          c.appendChild(el('p', '', n.texto));
+          if (n.link && /^https?:\/\//.test(n.link)) {
+            var a = el('a', 'mais', 'Ler mais →');
+            a.href = n.link; a.target = '_blank'; a.rel = 'noopener';
+            c.appendChild(a);
+          }
+          lista.appendChild(c);
+        });
+      })
+      .catch(function () {
+        document.getElementById('lista-noticias').appendChild(el('p', 'vazio', 'Não foi possível carregar as notícias.'));
+      });
+  </script>
+</body>
+</html>
