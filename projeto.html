@@ -11,25 +11,14 @@
   <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-  <header>
-    <a href="index.html" class="marca">
-      <img src="logo,png.png" alt="Logo BORGESSFUT">
-      <span>BORGESSFUT</span>
-    </a>
-    <nav>
-      <a href="index.html#sobre">Sobre</a>
-      <a href="index.html#noticias">Notícias</a>
-      <a href="index.html#projetos">Projetos</a>
-      <a href="index.html#contato">Contato</a>
-    </nav>
-  </header>
+  <div id="cabecalho"></div>
 
   <main class="pagina" id="conteudo">
-    <a href="index.html#projetos" class="voltar">← Voltar aos projetos</a>
+    <a href="projetos.html" class="voltar">← Voltar aos projetos</a>
   </main>
 
-  <footer>© BORGESSFUT</footer>
-
+  <div id="rodape"></div>
+  <script src="site.js"></script>
   <script>
     function slug(t) {
       return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
