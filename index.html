@@ -22,19 +22,7 @@
         <a href="noticias.html" class="botao">Ver notícias</a>
       </div>
 
-      <aside class="capa-projetos">
-        <a class="projeto-card" href="projeto.html?p=entrevistas">
-          <img src="entrevistas.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
-          <span>Entrevistas</span>
-        </a>
-        <a class="projeto-card" href="projeto.html?p=1-minuto">
-          <img src="1minuto.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
-          <span>1 Minuto</span>
-        </a>
-        <a class="projeto-card" href="projeto.html?p=textos">
-          <img src="textos.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
-          <span>Textos</span>
-        </a>
+      <aside class="capa-projetos" id="capa-projetos">
         <a class="ver-todos" href="projetos.html">Ver todos os projetos →</a>
       </aside>
 
@@ -46,11 +34,43 @@
   <div id="rodape"></div>
   <script src="site.js"></script>
   <script>
+    function slug(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+
     fetch('content/home.json')
       .then(function (r) { return r.json(); })
       .then(function (d) {
         document.getElementById('titulo').textContent = d.titulo;
         document.getElementById('texto').textContent = d.texto;
+      });
+
+    // Cartões dos projetos na capa (vêm do painel)
+    fetch('content/projetos.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var aside = document.getElementById('capa-projetos');
+        var ver = aside.querySelector('.ver-todos');
+        (d.itens || []).slice(0, 3).forEach(function (p) {
+          var a = el('a', 'projeto-card');
+          a.href = 'projeto.html?p=' + slug(p.nome);
+          if (p.imagem) {
+            var im = el('img');
+            im.src = p.imagem;
+            im.alt = p.nome;
+            a.appendChild(im);
+          } else {
+            a.appendChild(el('span', '', p.nome));
+          }
+          aside.insertBefore(a, ver);
+        });
       });
 
     // Bolinhas do rodapé da capa
