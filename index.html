@@ -13,12 +13,32 @@
 <body>
   <div id="cabecalho"></div>
 
-  <div class="capa" role="img" aria-label="BORGESSFUT"></div>
+  <div class="capa">
+    <div class="capa-conteudo">
 
-  <div class="intro">
-    <h1 id="titulo"></h1>
-    <p id="texto"></p>
-    <a href="noticias.html" class="botao">Ver notícias</a>
+      <div class="capa-texto">
+        <h1 id="titulo"></h1>
+        <p id="texto"></p>
+        <a href="noticias.html" class="botao">Ver notícias</a>
+      </div>
+
+      <aside class="capa-projetos">
+        <a class="projeto-card" href="projeto.html?p=entrevistas">
+          <img src="entrevistas.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
+          <span>Entrevistas</span>
+        </a>
+        <a class="projeto-card" href="projeto.html?p=1-minuto">
+          <img src="1minuto.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
+          <span>1 Minuto</span>
+        </a>
+        <a class="projeto-card" href="projeto.html?p=textos">
+          <img src="textos.png" alt="" onload="this.parentNode.classList.add('com-logo')" onerror="this.style.display='none'">
+          <span>Textos</span>
+        </a>
+        <a class="ver-todos" href="projetos.html">Ver todos os projetos →</a>
+      </aside>
+
+    </div>
   </div>
 
   <div id="rodape"></div>
