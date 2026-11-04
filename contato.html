@@ -56,6 +56,13 @@
       </a>
 
     </div>
+
+    <p class="copiar-linha">
+      Usa outro e-mail (Outlook, Yahoo...)? Copie o endereço:
+      <strong class="email-texto"></strong>
+      <button type="button" id="copiar" class="btn-copiar">Copiar e-mail</button>
+      ou <a id="link-mailto" href="#">abra no programa de e-mail do computador</a>.
+    </p>
   </main>
 
   <section class="clara cresce">
@@ -88,12 +95,36 @@
   <script>
     var EMAIL = 'borgess.fut@gmail.com';
 
+    function gmail(assunto) {
+      return 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(EMAIL) +
+        (assunto ? '&su=' + encodeURIComponent(assunto) : '');
+    }
+
+    // Botões: abrem o Gmail no navegador, com o assunto preenchido
     document.querySelectorAll('[data-assunto]').forEach(function (a) {
-      var s = a.getAttribute('data-assunto');
-      a.href = 'mailto:' + EMAIL + (s ? '?subject=' + encodeURIComponent(s) : '');
+      a.href = gmail(a.getAttribute('data-assunto'));
+      a.target = '_blank';
+      a.rel = 'noopener';
     });
+
     document.querySelectorAll('.email-texto').forEach(function (e) {
       e.textContent = EMAIL;
+    });
+
+    document.getElementById('link-mailto').href = 'mailto:' + EMAIL;
+
+    // Botão de copiar o endereço
+    document.getElementById('copiar').addEventListener('click', function () {
+      var b = this;
+      function ok() {
+        b.textContent = 'Copiado ✓';
+        setTimeout(function () { b.textContent = 'Copiar e-mail'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(EMAIL).then(ok, function () { b.textContent = EMAIL; });
+      } else {
+        b.textContent = EMAIL;
+      }
     });
   </script>
 </body>
