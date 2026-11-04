@@ -5,20 +5,21 @@
       "categoria": "Vídeo",
       "resumo": "Um quadro de conversas para conhecer um pouco da história de cada entrevistado",
       "texto": "As Entrevistas são um quadro dedicado a conhecer melhor a história de cada entrevistado por meio da conversa. O formato muda conforme a ocasião: pode acontecer em pré-jogos, em um ambiente reservado, só com o entrevistado, para uma conversa mais profunda sobre a trajetória dele, ou no dia a dia, abordando um tema do momento.",
-      "imagem": ""
+      "imagem": "/imagens/entrevistas.png"
     },
     {
       "nome": "Posts",
       "categoria": "Texto",
       "resumo": "Matérias jornalísticas em uma leitura rápida e com referências além das quatro linhas",
       "texto": "Os Posts pegam o que seria uma matéria jornalística e a apresentam em uma versão mais curta, sem perder a informação. Em alguns casos, o texto ganha um toque a mais, com referências de fora de campo, como músicas, livros e outras áreas, que aproximam o futebol de outros universos.",
-      "imagem": ""
+      "imagem": "/imagens/posts-legendas.png"
     },
     {
       "nome": "Isso eu te conto em 1 minuto",
       "categoria": "Vídeo",
       "resumo": "Vídeos de 1 minuto para contar histórias do futebol, das mais recentes às mais antigas",
-      "texto": "No Isso eu te conto em 1 minuto, histórias do futebol, novas ou antigas, são contadas em vídeos curtos, de 1 minuto cada. É um jeito rápido de conhecer ou relembrar casos e momentos que marcaram o esporte"
+      "texto": "No Isso eu te conto em 1 minuto, histórias do futebol, novas ou antigas, são contadas em vídeos curtos, de 1 minuto cada. É um jeito rápido de conhecer ou relembrar casos e momentos que marcaram o esporte",
+      "imagem": "/imagens/isso-eu-te-conto-em-1-minuto.png"
     }
   ]
 }
