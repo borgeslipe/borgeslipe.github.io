@@ -13,13 +13,88 @@
 <body>
   <div id="cabecalho"></div>
 
-  <main class="pagina">
+  <main class="pagina larga">
     <h1>Contato</h1>
-    <p>borgess.fut@gmail.com</p>
-    <p>@borgessfut</p>
+    <p class="lead">Quer sugerir uma pauta, propor uma parceria ou trocar uma ideia sobre futebol? É só chamar por e-mail ou pelas redes.</p>
+
+    <div class="contato-grid">
+
+      <a class="contato-card" data-assunto="" style="--cor:#013a75">
+        <span class="contato-icone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>E-mail</h3>
+        <p class="email-texto"></p>
+        <span class="contato-acao">Enviar e-mail ▶</span>
+      </a>
+
+      <a class="contato-card" href="https://www.instagram.com/borgessfut/" target="_blank" rel="noopener" style="--cor:#0181f3">
+        <span class="contato-icone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+        </span>
+        <h3>Instagram</h3>
+        <p>@borgessfut</p>
+        <span class="contato-acao">Seguir no Instagram ▶</span>
+      </a>
+
+      <a class="contato-card" href="https://www.tiktok.com/@borgessfut" target="_blank" rel="noopener" style="--cor:#0160b5">
+        <span class="contato-icone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+        </span>
+        <h3>TikTok</h3>
+        <p>@borgessfut</p>
+        <span class="contato-acao">Seguir no TikTok ▶</span>
+      </a>
+
+      <a class="contato-card" href="https://x.com/borgessfut" target="_blank" rel="noopener" style="--cor:#0a2f57">
+        <span class="contato-icone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+        </span>
+        <h3>X</h3>
+        <p>@borgessfut</p>
+        <span class="contato-acao">Seguir no X ▶</span>
+      </a>
+
+    </div>
   </main>
+
+  <section class="clara cresce">
+    <h2>Sobre o que você quer falar?</h2>
+    <div class="assuntos-grid">
+
+      <a class="assunto" data-assunto="Sugestão de pauta" style="--cor:#0181f3">
+        <h3>Sugerir uma pauta</h3>
+        <p>Viu uma história de futebol que merece virar conteúdo? Manda para a gente.</p>
+        <span class="contato-acao">Escrever ▶</span>
+      </a>
+
+      <a class="assunto" data-assunto="Parceria" style="--cor:#013a75">
+        <h3>Propor uma parceria</h3>
+        <p>Projetos, colaborações e ideias em conjunto.</p>
+        <span class="contato-acao">Escrever ▶</span>
+      </a>
+
+      <a class="assunto" data-assunto="Sobre os projetos do BORGESSFUT" style="--cor:#38b6ff">
+        <h3>Falar sobre um projeto</h3>
+        <p>Dúvidas, elogios ou sugestões sobre os projetos do BORGESSFUT.</p>
+        <span class="contato-acao">Escrever ▶</span>
+      </a>
+
+    </div>
+  </section>
 
   <div id="rodape"></div>
   <script src="site.js"></script>
+  <script>
+    var EMAIL = 'borgess.fut@gmail.com';
+
+    document.querySelectorAll('[data-assunto]').forEach(function (a) {
+      var s = a.getAttribute('data-assunto');
+      a.href = 'mailto:' + EMAIL + (s ? '?subject=' + encodeURIComponent(s) : '');
+    });
+    document.querySelectorAll('.email-texto').forEach(function (e) {
+      e.textContent = EMAIL;
+    });
+  </script>
 </body>
 </html>
