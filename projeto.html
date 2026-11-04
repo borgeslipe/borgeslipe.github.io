@@ -13,13 +13,15 @@
 <body>
   <div id="cabecalho"></div>
 
-  <main class="pagina" id="conteudo">
+  <main class="pagina larga projeto-pagina" id="conteudo">
     <a href="projetos.html" class="voltar">← Voltar aos projetos</a>
   </main>
 
   <div id="rodape"></div>
   <script src="site.js"></script>
   <script>
+    var MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
     function slug(t) {
       return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -30,20 +32,102 @@
       if (txt) e.textContent = txt;
       return e;
     }
+    function dataLonga(s) {
+      var p = (s || '').slice(0, 10).split('-');
+      if (p.length !== 3) return '';
+      return Number(p[2]) + ' de ' + MESES[Number(p[1]) - 1] + ' de ' + p[0];
+    }
+    function idDe(n) {
+      return slug(n.titulo) + '-' + (n.data || '').slice(0, 10);
+    }
+    function youtubeId(url) {
+      var m = (url || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : null;
+    }
+
     var alvo = new URLSearchParams(location.search).get('p');
     var main = document.getElementById('conteudo');
 
-    fetch('content/projetos.json')
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        var p = (d.itens || []).find(function (x) { return slug(x.nome) === alvo; });
-        if (!p) { main.appendChild(el('p', '', 'Projeto não encontrado.')); return; }
-        document.title = p.nome + ' | BORGESSFUT';
-        main.appendChild(el('h1', '', p.nome));
-        if (p.imagem) { var im = el('img'); im.src = p.imagem; im.alt = p.nome; main.appendChild(im); }
-        main.appendChild(el('div', 'texto', p.texto));
-      })
-      .catch(function () { main.appendChild(el('p', '', 'Não foi possível carregar o projeto.')); });
+    Promise.all([
+      fetch('content/projetos.json').then(function (r) { return r.json(); }),
+      fetch('content/noticias.json').then(function (r) { return r.json(); }).catch(function () { return { itens: [] }; })
+    ]).then(function (res) {
+      var p = (res[0].itens || []).find(function (x) { return slug(x.nome) === alvo; });
+      if (!p) { main.appendChild(el('p', '', 'Projeto não encontrado.')); return; }
+      document.title = p.nome + ' | BORGESSFUT';
+
+      if (p.imagem) {
+        var topo = el('div', 'projeto-topo');
+        var logo = el('img');
+        logo.src = p.imagem;
+        logo.alt = 'Logo ' + p.nome;
+        topo.appendChild(logo);
+        main.appendChild(topo);
+      }
+
+      main.appendChild(el('h1', '', p.nome));
+      if (p.categoria) main.appendChild(el('span', 'etiqueta' + (p.categoria === 'Texto' ? ' texto' : ''), p.categoria));
+      if (p.resumo) main.appendChild(el('p', 'subtitulo-artigo', p.resumo));
+      main.appendChild(el('div', 'texto projeto-bio', p.texto));
+
+      var videos = (p.videos || []).filter(function (v) { return v && v.link; });
+      if (videos.length) {
+        main.appendChild(el('h2', '', 'Vídeos'));
+        var gv = el('div', 'videos');
+        videos.forEach(function (v) {
+          var item = el('div', 'video-item');
+          var id = youtubeId(v.link);
+          if (id) {
+            var q = el('div', 'quadro');
+            var f = el('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/' + id;
+            f.title = v.titulo || p.nome;
+            f.loading = 'lazy';
+            f.allowFullscreen = true;
+            q.appendChild(f);
+            item.appendChild(q);
+          } else if (/^https?:\/\//.test(v.link)) {
+            var a = el('a', 'video-link', 'Assistir ▶');
+            a.href = v.link;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            item.appendChild(a);
+          }
+          if (v.titulo) item.appendChild(el('h3', '', v.titulo));
+          gv.appendChild(item);
+        });
+        main.appendChild(gv);
+      }
+
+      var posts = (res[1].itens || []).filter(function (n) { return n.projeto === p.nome; })
+        .sort(function (a, b) { return (b.data || '').localeCompare(a.data || ''); });
+      if (posts.length) {
+        main.appendChild(el('h2', '', 'Textos e posts'));
+        var gp = el('div', 'cards-noticias');
+        posts.forEach(function (n) {
+          var a = el('a', 'card-noticia');
+          a.href = 'noticias.html?n=' + idDe(n);
+          var capa = el('div', 'card-capa');
+          if (n.imagem) {
+            var im = el('img');
+            im.src = n.imagem;
+            im.alt = '';
+            im.loading = 'lazy';
+            capa.appendChild(im);
+          }
+          a.appendChild(capa);
+          var corpo = el('div', 'card-corpo');
+          corpo.appendChild(el('h3', '', n.titulo));
+          if (n.data) corpo.appendChild(el('p', 'card-data', dataLonga(n.data)));
+          corpo.appendChild(el('span', 'card-ler', 'Ler a notícia ▶'));
+          a.appendChild(corpo);
+          gp.appendChild(a);
+        });
+        main.appendChild(gp);
+      }
+    }).catch(function () {
+      main.appendChild(el('p', '', 'Não foi possível carregar o projeto.'));
+    });
   </script>
 </body>
 </html>
