@@ -339,3 +339,9 @@ h2 { font-size: 32px; }
 /* Página da notícia aberta */
 .artigo { max-width: 820px; }
 .artigo .data-artigo { margin: 0 0 20px; color: #5b7089; }
+.subtitulo-artigo {
+  font-size: 22px;
+  line-height: 1.4;
+  color: #3a5a80;
+  margin: 0 0 14px;
+}
