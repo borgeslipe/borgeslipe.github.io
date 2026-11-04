@@ -13,49 +13,119 @@
 <body>
   <div id="cabecalho"></div>
 
-  <main class="pagina larga">
-    <h1>Notícias</h1>
-    <div class="cards" id="lista-noticias"></div>
+  <main class="pagina larga" id="conteudo">
+    <h1 id="titulo-pagina">Notícias</h1>
+    <div id="area"></div>
   </main>
 
   <div id="rodape"></div>
   <script src="site.js"></script>
   <script>
+    var MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
+    function slug(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
     function el(tag, cls, txt) {
       var e = document.createElement(tag);
       if (cls) e.className = cls;
       if (txt) e.textContent = txt;
       return e;
     }
-    function dataBR(s) {
+    function dataLonga(s) {
       var p = (s || '').slice(0, 10).split('-');
-      return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : '';
+      if (p.length !== 3) return '';
+      return Number(p[2]) + ' de ' + MESES[Number(p[1]) - 1] + ' de ' + p[0];
+    }
+    function idDe(n) {
+      return slug(n.titulo) + '-' + (n.data || '').slice(0, 10);
+    }
+
+    var area = document.getElementById('area');
+    var alvo = new URLSearchParams(location.search).get('n');
+
+    function cartao(n) {
+      var a = el('a', 'card-noticia');
+      a.href = 'noticias.html?n=' + idDe(n);
+
+      var capa = el('div', 'card-capa');
+      if (n.imagem) {
+        var im = el('img');
+        im.src = n.imagem;
+        im.alt = '';
+        im.loading = 'lazy';
+        capa.appendChild(im);
+      }
+      a.appendChild(capa);
+
+      var corpo = el('div', 'card-corpo');
+      corpo.appendChild(el('h3', '', n.titulo));
+      if (n.data) corpo.appendChild(el('p', 'card-data', dataLonga(n.data)));
+      corpo.appendChild(el('span', 'card-ler', 'Ler a notícia ▶'));
+      a.appendChild(corpo);
+      return a;
+    }
+
+    function mostrarLista(itens) {
+      if (!itens.length) {
+        area.appendChild(el('p', 'vazio', 'Nenhuma notícia publicada ainda.'));
+        return;
+      }
+      area.className = 'cards-noticias';
+      itens.forEach(function (n) { area.appendChild(cartao(n)); });
+    }
+
+    function mostrarNoticia(n) {
+      document.title = n.titulo + ' | BORGESSFUT';
+      document.getElementById('titulo-pagina').style.display = 'none';
+      area.className = 'artigo';
+
+      var v = el('a', 'voltar', '← Voltar às notícias');
+      v.href = 'noticias.html';
+      area.appendChild(v);
+
+      area.appendChild(el('h1', '', n.titulo));
+      if (n.data) area.appendChild(el('p', 'data-artigo', dataLonga(n.data)));
+      if (n.imagem) {
+        var im = el('img');
+        im.src = n.imagem;
+        im.alt = n.titulo;
+        area.appendChild(im);
+      }
+      area.appendChild(el('div', 'texto', n.texto));
+      if (n.link && /^https?:\/\//.test(n.link)) {
+        var b = el('a', 'botao', 'Ler na fonte original →');
+        b.href = n.link;
+        b.target = '_blank';
+        b.rel = 'noopener';
+        area.appendChild(b);
+      }
+    }
+
+    function naoEncontrada() {
+      document.getElementById('titulo-pagina').style.display = 'none';
+      var v = el('a', 'voltar', '← Voltar às notícias');
+      v.href = 'noticias.html';
+      area.appendChild(v);
+      area.appendChild(el('p', '', 'Notícia não encontrada.'));
     }
 
     fetch('content/noticias.json')
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        var lista = document.getElementById('lista-noticias');
         var itens = (d.itens || []).slice().sort(function (a, b) {
           return (b.data || '').localeCompare(a.data || '');
         });
-        if (!itens.length) { lista.appendChild(el('p', 'vazio', 'Nenhuma notícia publicada ainda.')); return; }
-        itens.forEach(function (n) {
-          var c = el('div', 'card');
-          if (n.imagem) { var im = el('img'); im.src = n.imagem; im.alt = n.titulo; c.appendChild(im); }
-          if (n.data) c.appendChild(el('p', 'data', dataBR(n.data)));
-          c.appendChild(el('h3', '', n.titulo));
-          c.appendChild(el('p', '', n.texto));
-          if (n.link && /^https?:\/\//.test(n.link)) {
-            var a = el('a', 'mais', 'Ler mais →');
-            a.href = n.link; a.target = '_blank'; a.rel = 'noopener';
-            c.appendChild(a);
-          }
-          lista.appendChild(c);
-        });
+        if (alvo) {
+          var n = itens.find(function (x) { return idDe(x) === alvo; });
+          if (n) mostrarNoticia(n); else naoEncontrada();
+        } else {
+          mostrarLista(itens);
+        }
       })
       .catch(function () {
-        document.getElementById('lista-noticias').appendChild(el('p', 'vazio', 'Não foi possível carregar as notícias.'));
+        area.appendChild(el('p', 'vazio', 'Não foi possível carregar as notícias.'));
       });
   </script>
 </body>
