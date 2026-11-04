@@ -161,3 +161,72 @@ footer p { margin: 0; }
 h2 { font-size: 32px; }
 .pagina h1 { font-size: clamp(30px, 4.5vw, 48px); }
 .card h3 { font-size: 22px; }
+/* Capa completa: texto à esquerda, projetos à direita */
+.capa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  background:
+    url('capa.jpg') center / cover no-repeat,
+    url('capa.png') center / cover no-repeat,
+    linear-gradient(135deg, var(--azul), #014a8f);
+}
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 30, 70, 0.6), rgba(0, 30, 70, 0.1));
+}
+.capa-conteudo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 60px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.capa-texto { flex: 1 1 420px; max-width: 760px; }
+.capa h1 {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+.capa p { font-size: clamp(18px, 2vw, 22px); margin: 0 0 28px; }
+.capa .botao { background: #ffffff; color: var(--azul-escuro); }
+.capa .botao:hover { background: var(--azul-claro); }
+
+.capa-projetos { flex: 0 0 260px; display: flex; flex-direction: column; gap: 12px; }
+.projeto-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(0, 30, 70, 0.35);
+}
+.projeto-card:hover { background: rgba(255, 255, 255, 0.18); }
+.projeto-card::after { content: "▶"; font-size: 12px; }
+.projeto-card img { max-height: 40px; max-width: 160px; object-fit: contain; }
+.projeto-card span {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+.projeto-card.com-logo span { display: none; }
+.ver-todos {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+.ver-todos:hover { text-decoration: underline; }
