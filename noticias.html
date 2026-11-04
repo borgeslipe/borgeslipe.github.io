@@ -86,6 +86,7 @@
       area.appendChild(v);
 
       area.appendChild(el('h1', '', n.titulo));
+            if (n.subtitulo) area.appendChild(el('p', 'subtitulo-artigo', n.subtitulo));
       if (n.data) area.appendChild(el('p', 'data-artigo', dataLonga(n.data)));
       if (n.imagem) {
         var im = el('img');
