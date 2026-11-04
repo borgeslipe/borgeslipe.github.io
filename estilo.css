@@ -643,3 +643,19 @@ footer { margin-top: auto; }
   margin: 0;
 }
 .capa .projeto-card span { color: #ffffff; }
+/* Linha "copiar e-mail" na página de contato */
+.pagina > p.copiar-linha { margin: 26px 0 0; color: #3a5a80; font-size: 16px; }
+.copiar-linha strong { color: #0a2f57; overflow-wrap: anywhere; }
+.copiar-linha a { color: var(--azul-escuro); text-decoration: underline; }
+.btn-copiar {
+  font: inherit;
+  font-weight: 700;
+  margin-left: 8px;
+  padding: 6px 14px;
+  border: 2px solid var(--azul);
+  background: #ffffff;
+  color: var(--azul-escuro);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-copiar:hover { background: var(--azul-claro); }
