@@ -1,9 +1,11 @@
 {
   "itens": [
     {
-      "nome": "ISSO EU TE CONTO EM 1 MINUTO",
-      "resumo": "Série de vídeos curtos com 1 minuto de duração contando histórias do futebol!",
-      "texto": "O projeto \"Isso eu te conto em 1 minuto\" é uma érie de vídeos curtos com 1 minuto de duração contando histórias do futebol, seja recente ou do passado!"
+      "nome": "Entrevistas",
+      "categoria": "Vídeo",
+      "resumo": "Um quadro de conversas para conhecer um pouco da história de cada entrevistado",
+      "texto": "As Entrevistas são um quadro dedicado a conhecer melhor a história de cada entrevistado por meio da conversa. O formato muda conforme a ocasião: pode acontecer em pré-jogos, em um ambiente reservado, só com o entrevistado, para uma conversa mais profunda sobre a trajetória dele, ou no dia a dia, abordando um tema do momento.",
+      "imagem": "/imagens/isso-eu-te-conto-em-1-minuto.png"
     }
   ]
 }
