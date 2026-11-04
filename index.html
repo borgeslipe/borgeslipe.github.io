@@ -39,6 +39,8 @@
       </aside>
 
     </div>
+
+    <div class="bolas" id="bolas"></div>
   </div>
 
   <div id="rodape"></div>
@@ -50,6 +52,45 @@
         document.getElementById('titulo').textContent = d.titulo;
         document.getElementById('texto').textContent = d.texto;
       });
+
+    // Bolinhas do rodapé da capa
+    var BOLA =
+      '<svg viewBox="-18 -18 36 36" aria-hidden="true">' +
+      '<circle r="16" fill="none" stroke="currentColor" stroke-width="2.4"/>' +
+      [0, 72, 144, 216, 288].map(function (a) {
+        return '<polygon points="0,4.5 -4.3,1.4 -2.7,-3.6 2.7,-3.6 4.3,1.4" ' +
+          'transform="rotate(' + a + ') translate(0,-8.6)" ' +
+          'fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>';
+      }).join('') +
+      '</svg>';
+
+    var cores = ['#ffffff', '#cfe6ff', '#8cc8ff', '#ffffff', '#5db3ff'];
+    var cont = document.getElementById('bolas');
+    var bolas = [];
+    for (var i = 0; i < 16; i++) {
+      var b = document.createElement('div');
+      b.className = 'bola';
+      b.style.color = cores[i % cores.length];
+      b.innerHTML = BOLA;
+      b.firstChild.style.animationDelay = (i * -0.23) + 's';
+      b.firstChild.style.animationDuration = (1.4 + (i % 4) * 0.25) + 's';
+      cont.appendChild(b);
+      bolas.push(b);
+    }
+
+    // As bolas perto do mouse crescem
+    var capa = document.querySelector('.capa');
+    capa.addEventListener('mousemove', function (e) {
+      bolas.forEach(function (b) {
+        var r = b.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - e.clientX);
+        var s = 1 + Math.max(0, 1 - d / 180) * 0.9;
+        b.style.transform = 'scale(' + s + ')';
+      });
+    });
+    capa.addEventListener('mouseleave', function () {
+      bolas.forEach(function (b) { b.style.transform = ''; });
+    });
   </script>
 </body>
 </html>
