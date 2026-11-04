@@ -10,9 +10,15 @@
     {
       "nome": "Posts",
       "categoria": "Texto",
-      "resumo": "Matérias jornalísticas em uma leitura rápida e com referências além das quatro linhas.",
+      "resumo": "Matérias jornalísticas em uma leitura rápida e com referências além das quatro linhas",
       "texto": "Os Posts pegam o que seria uma matéria jornalística e a apresentam em uma versão mais curta, sem perder a informação. Em alguns casos, o texto ganha um toque a mais, com referências de fora de campo, como músicas, livros e outras áreas, que aproximam o futebol de outros universos.",
       "imagem": ""
+    },
+    {
+      "nome": "Isso eu te conto em 1 minuto",
+      "categoria": "Vídeo",
+      "resumo": "Vídeos de 1 minuto para contar histórias do futebol, das mais recentes às mais antigas",
+      "texto": "No Isso eu te conto em 1 minuto, histórias do futebol, novas ou antigas, são contadas em vídeos curtos, de 1 minuto cada. É um jeito rápido de conhecer ou relembrar casos e momentos que marcaram o esporte"
     }
   ]
 }
