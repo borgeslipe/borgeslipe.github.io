@@ -127,3 +127,37 @@ nav a.ativo { text-decoration: underline; text-underline-offset: 6px; }
 .pagina.larga { max-width: none; }
 .pagina > p { font-size: 20px; }
 .vazio { opacity: 0.7; }
+/* Ícones das redes sociais */
+.lado { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.redes { display: flex; gap: 10px; }
+.rede {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  color: #ffffff;
+}
+.rede svg { width: 20px; height: 20px; }
+.rede:hover { background: rgba(255, 255, 255, 0.18); }
+footer .redes { justify-content: center; margin-bottom: 12px; }
+footer p { margin: 0; }
+
+/* Capa da página inicial: ocupa a tela inteira */
+.capa {
+  min-height: calc(100vh - 72px);
+  min-height: calc(100svh - 72px);
+  background:
+    url('capa.jpg') center / cover no-repeat,
+    url('capa.png') center / cover no-repeat,
+    url('banner.png.png') center / cover no-repeat,
+    var(--azul);
+}
+
+/* Fontes azuis menores */
+.intro h1 { font-size: clamp(28px, 4vw, 44px); }
+h2 { font-size: 32px; }
+.pagina h1 { font-size: clamp(30px, 4.5vw, 48px); }
+.card h3 { font-size: 22px; }
