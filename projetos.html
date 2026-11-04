@@ -15,12 +15,14 @@
 
   <main class="pagina larga">
     <h1>Projetos</h1>
-    <div class="cards" id="lista-projetos"></div>
+    <div class="cards-projetos" id="lista-projetos"></div>
   </main>
 
   <div id="rodape"></div>
   <script src="site.js"></script>
   <script>
+    var CORES = ['#0181f3', '#013a75', '#38b6ff', '#0160b5'];
+
     function slug(t) {
       return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -32,25 +34,35 @@
       return e;
     }
 
+    var lista = document.getElementById('lista-projetos');
+
     fetch('content/projetos.json')
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        var lista = document.getElementById('lista-projetos');
         var itens = d.itens || [];
         if (!itens.length) { lista.appendChild(el('p', 'vazio', 'Nenhum projeto publicado ainda.')); return; }
-        itens.forEach(function (p) {
-          var c = el('div', 'card');
-          if (p.imagem) { var im = el('img'); im.src = p.imagem; im.alt = p.nome; c.appendChild(im); }
-          c.appendChild(el('h3', '', p.nome));
-          c.appendChild(el('p', '', p.resumo));
-          var a = el('a', 'mais', 'Ver projeto →');
+        itens.forEach(function (p, i) {
+          var a = el('a', 'card-projeto');
           a.href = 'projeto.html?p=' + slug(p.nome);
-          c.appendChild(a);
-          lista.appendChild(c);
+          a.style.setProperty('--cor', CORES[i % CORES.length]);
+
+          if (p.imagem) {
+            var lg = el('div', 'logo-projeto');
+            var im = el('img');
+            im.src = p.imagem;
+            im.alt = 'Logo ' + p.nome;
+            lg.appendChild(im);
+            a.appendChild(lg);
+          }
+          a.appendChild(el('h3', '', p.nome));
+          if (p.categoria) a.appendChild(el('span', 'etiqueta' + (p.categoria === 'Texto' ? ' texto' : ''), p.categoria));
+          if (p.resumo) a.appendChild(el('p', 'legenda', p.resumo));
+          a.appendChild(el('span', 'conhecer', 'Conhecer o projeto ▶'));
+          lista.appendChild(a);
         });
       })
       .catch(function () {
-        document.getElementById('lista-projetos').appendChild(el('p', 'vazio', 'Não foi possível carregar os projetos.'));
+        lista.appendChild(el('p', 'vazio', 'Não foi possível carregar os projetos.'));
       });
   </script>
 </body>
