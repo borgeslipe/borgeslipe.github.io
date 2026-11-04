@@ -597,3 +597,23 @@ footer { margin-top: auto; }
   border-radius: 6px;
 }
 .botao-vazado:hover { background: rgba(255, 255, 255, 0.18); }
+/* Cartões de projeto na capa: fundo claro e logo em destaque */
+.capa .projeto-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #ffffff;
+  min-height: 76px;
+}
+.capa .projeto-card:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 30, 70, 0.3);
+}
+.capa .projeto-card::after { color: var(--azul); }
+.capa .projeto-card img {
+  max-height: 48px;
+  max-width: 170px;
+  width: auto;
+  object-fit: contain;
+  margin: 0;
+}
+.capa .projeto-card span { color: #0a2f57; }
