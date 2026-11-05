@@ -30,7 +30,7 @@ collections:
               - { label: "Título", name: "titulo", widget: "string" }
               - { label: "Subtítulo (opcional)", name: "subtitulo", widget: "string", required: false }
               - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
-              - { label: "Texto", name: "texto", widget: "text" }
+              - { label: "Texto", name: "texto", widget: "textorico" }
               - { label: "Imagem", name: "imagem", widget: "image", required: false }
               - { label: "Link da fonte original (opcional)", name: "link", widget: "string", required: false }
               - label: "Projeto (opcional)"
