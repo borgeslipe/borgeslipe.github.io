@@ -659,3 +659,8 @@ footer { margin-top: auto; }
   cursor: pointer;
 }
 .btn-copiar:hover { background: var(--azul-claro); }
+/* Texto formatado nas notícias */
+.texto.rico { white-space: normal; }
+.texto.rico p { margin: 0 0 1em; }
+.texto.rico ul { margin: 0 0 1em 1.4em; padding: 0; }
+.texto.rico li { margin-bottom: 0.4em; }
