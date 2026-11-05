@@ -20,6 +20,7 @@
 
   <div id="rodape"></div>
   <script src="site.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
   <script>
     var MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
 
@@ -40,6 +41,19 @@
     }
     function idDe(n) {
       return slug(n.titulo) + '-' + (n.data || '').slice(0, 10);
+    }
+
+    // Texto da notícia: formatado (HTML limpo) ou simples (notícias antigas)
+    function conteudo(texto) {
+      var d = el('div', 'texto');
+      var t = texto || '';
+      if (t.trim().charAt(0) === '<' && window.DOMPurify) {
+        d.className = 'texto rico';
+        d.innerHTML = DOMPurify.sanitize(t);
+      } else {
+        d.textContent = t;
+      }
+      return d;
     }
 
     var area = document.getElementById('area');
@@ -86,7 +100,7 @@
       area.appendChild(v);
 
       area.appendChild(el('h1', '', n.titulo));
-            if (n.subtitulo) area.appendChild(el('p', 'subtitulo-artigo', n.subtitulo));
+      if (n.subtitulo) area.appendChild(el('p', 'subtitulo-artigo', n.subtitulo));
       if (n.data) area.appendChild(el('p', 'data-artigo', dataLonga(n.data)));
       if (n.imagem) {
         var im = el('img');
@@ -94,7 +108,7 @@
         im.alt = n.titulo;
         area.appendChild(im);
       }
-      area.appendChild(el('div', 'texto', n.texto));
+      area.appendChild(conteudo(n.texto));
       if (n.link && /^https?:\/\//.test(n.link)) {
         var b = el('a', 'botao', 'Ler na fonte original →');
         b.href = n.link;
