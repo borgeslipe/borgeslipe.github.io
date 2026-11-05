@@ -3,7 +3,8 @@
     {
       "titulo": "Notícia Teste",
       "texto": "Texto teste",
-      "data": "2026-11-01"
+      "data": "2026-11-01",
+      "imagem": "/imagens/como_-thumb.png"
     },
     {
       "titulo": "Novo site do Borgessfut!",
