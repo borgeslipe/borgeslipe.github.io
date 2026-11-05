@@ -2,9 +2,110 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Painel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css">
+  <style>
+    .rt-wrap { position: relative; z-index: 5; background: #ffffff; border-radius: 4px; }
+    .rt-wrap .ql-editor { min-height: 280px; font-size: 16px; line-height: 1.5; }
+    .rt-wrap .ql-picker-options { z-index: 1000; }
+    .rt-wrap .ql-snow .ql-picker.ql-font { width: 140px; }
+    .rt-wrap .ql-snow .ql-picker.ql-size { width: 90px; }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <script>
+    (function () {
+      var FONTES = ['Arial', 'Georgia', 'Verdana', 'Tahoma', 'Courier'];
+      var TAMANHOS = ['12px', '14px', '16px', '18px', '24px', '32px', '40px'];
+
+      // Fonte, tamanho e alinhamento gravados direto no texto (sem depender de CSS extra no site)
+      var Font = Quill.import('attributors/style/font');
+      Font.whitelist = FONTES;
+      Quill.register(Font, true);
+
+      var Size = Quill.import('attributors/style/size');
+      Size.whitelist = TAMANHOS;
+      Quill.register(Size, true);
+
+      Quill.register(Quill.import('attributors/style/align'), true);
+
+      function escapar(t) {
+        return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function barra() {
+        var fontes = '<option selected>Padrão do site</option>' + FONTES.map(function (f) {
+          return '<option value="' + f + '">' + f + '</option>';
+        }).join('');
+        var tamanhos = '<option selected>Padrão</option>' + TAMANHOS.map(function (t) {
+          return '<option value="' + t + '">' + parseInt(t, 10) + '</option>';
+        }).join('');
+        return '' +
+          '<span class="ql-formats">' +
+            '<select class="ql-font">' + fontes + '</select>' +
+            '<select class="ql-size">' + tamanhos + '</select>' +
+          '</span>' +
+          '<span class="ql-formats">' +
+            '<button type="button" class="ql-bold" title="Negrito"></button>' +
+            '<button type="button" class="ql-italic" title="Itálico"></button>' +
+            '<button type="button" class="ql-underline" title="Sublinhado"></button>' +
+          '</span>' +
+          '<span class="ql-formats"><select class="ql-color" title="Cor da letra"></select></span>' +
+          '<span class="ql-formats"><select class="ql-align" title="Alinhar texto"></select></span>' +
+          '<span class="ql-formats"><button type="button" class="ql-list" value="bullet" title="Lista com marcadores"></button></span>' +
+          '<span class="ql-formats"><button type="button" class="ql-clean" title="Limpar formatação"></button></span>';
+      }
+
+      var Controle = createClass({
+        shouldComponentUpdate: function () { return false; },
+
+        componentDidMount: function () {
+          var self = this;
+          var host = this.host;
+          host.innerHTML = '<div class="rt-barra">' + barra() + '</div><div class="rt-area"></div>';
+
+          var quill = new Quill(host.querySelector('.rt-area'), {
+            theme: 'snow',
+            placeholder: 'Escreva o texto da notícia...',
+            modules: { toolbar: host.querySelector('.rt-barra') }
+          });
+
+          // Texto que já existe (formatado ou texto simples das notícias antigas)
+          var inicial = this.props.value || '';
+          if (inicial) {
+            if (inicial.trim().charAt(0) !== '<') {
+              inicial = '<p>' + escapar(inicial).replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
+            }
+            quill.clipboard.dangerouslyPasteHTML(inicial, 'silent');
+          }
+
+          quill.on('text-change', function (delta, antigo, origem) {
+            if (origem === 'silent') return;
+            var vazio = quill.getText().trim().length === 0;
+            self.props.onChange(vazio ? '' : quill.getSemanticHTML());
+          });
+        },
+
+        render: function () {
+          var self = this;
+          return h('div', {
+            className: 'rt-wrap',
+            ref: function (el) { self.host = el; }
+          });
+        }
+      });
+
+      var Previa = createClass({
+        render: function () {
+          return h('div', { dangerouslySetInnerHTML: { __html: this.props.value || '' } });
+        }
+      });
+
+      CMS.registerWidget('textorico', Controle, Previa);
+    })();
+  </script>
 </body>
 </html>
