@@ -667,3 +667,10 @@ footer { margin-top: auto; }
 /* Garante que o texto da notícia sempre quebre linha dentro da página */
 .texto.rico { overflow-wrap: break-word; word-wrap: break-word; }
 .artigo img { max-width: 100%; height: auto; }
+/* Autor da notícia: itálico e um pouco menor que o subtítulo (22px) */
+.autor-artigo {
+  font-style: italic;
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #3a5a80;
+}
