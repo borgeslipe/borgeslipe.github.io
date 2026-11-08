@@ -49,7 +49,7 @@
       var t = texto || '';
       if (t.trim().charAt(0) === '<' && window.DOMPurify) {
         d.className = 'texto rico';
-        d.innerHTML = DOMPurify.sanitize(t);
+               d.innerHTML = DOMPurify.sanitize(t.replace(/&nbsp;|\u00a0/g, ' '));
       } else {
         d.textContent = t;
       }
