@@ -101,6 +101,7 @@
 
       area.appendChild(el('h1', '', n.titulo));
       if (n.subtitulo) area.appendChild(el('p', 'subtitulo-artigo', n.subtitulo));
+            area.appendChild(el('p', 'autor-artigo', 'Por Felipe Borges'));
       if (n.data) area.appendChild(el('p', 'data-artigo', dataLonga(n.data)));
       if (n.imagem) {
         var im = el('img');
