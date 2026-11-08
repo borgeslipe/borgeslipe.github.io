@@ -1,17 +1,6 @@
 {
   "itens": [
     {
-      "titulo": "Notícia Teste",
-      "texto": "Texto teste",
-      "data": "2026-11-01",
-      "imagem": "/imagens/como_-thumb.png"
-    },
-    {
-      "titulo": "Novo site do Borgessfut!",
-      "data": "2026-11-03",
-      "texto": "AAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaa BBBBBBBBBBBBBbbbbbbbbbbbb CCCCCCCCCCCCCCccccccccccccc DDDDDDDDDDDDDDDDDDddddddddddd EEEEEEEEEEEE eeeeeeeeeee"
-    },
-    {
       "titulo": "MAIS UMA PROVA DA IMORTALIDADE",
       "subtitulo": "O Grêmio segura o empate no jogo de volta e sobrevive à pressão diante do Atlético Mineiro",
       "data": "2026-11-08",
