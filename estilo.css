@@ -664,3 +664,6 @@ footer { margin-top: auto; }
 .texto.rico p { margin: 0 0 1em; }
 .texto.rico ul { margin: 0 0 1em 1.4em; padding: 0; }
 .texto.rico li { margin-bottom: 0.4em; }
+/* Garante que o texto da notícia sempre quebre linha dentro da página */
+.texto.rico { overflow-wrap: break-word; word-wrap: break-word; }
+.artigo img { max-width: 100%; height: auto; }
