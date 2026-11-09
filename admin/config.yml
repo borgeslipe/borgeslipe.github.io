@@ -29,6 +29,8 @@ collections:
             fields:
               - { label: "Título", name: "titulo", widget: "string" }
               - { label: "Subtítulo (opcional)", name: "subtitulo", widget: "string", required: false }
+              - { label: "Seção", name: "secao", widget: "select", options: ["Futebol", "Outros esportes"], default: "Futebol", required: false }
+              - { label: "Esporte (só para Outros esportes)", name: "esporte", widget: "string", required: false }
               - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
               - { label: "Texto", name: "texto", widget: "textorico" }
               - { label: "Imagem", name: "imagem", widget: "image", required: false }
@@ -67,3 +69,21 @@ collections:
                 fields:
                   - { label: "Título do vídeo", name: "titulo", widget: "string" }
                   - { label: "Link do vídeo (YouTube, Instagram, TikTok...)", name: "link", widget: "string" }
+
+      - name: "portfolio"
+        label: "Portfólio"
+        file: "content/portfolio.json"
+        fields:
+          - label: "Trabalhos"
+            label_singular: "Trabalho"
+            name: "itens"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Tipo", name: "tipo", widget: "select", options: ["Texto", "Vídeo", "Áudio", "Foto", "Outro"], required: false }
+              - { label: "Onde foi publicado / para quem", name: "veiculo", widget: "string", required: false }
+              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
+              - { label: "Resumo", name: "resumo", widget: "text", required: false }
+              - { label: "Imagem", name: "imagem", widget: "image", required: false }
+              - { label: "Link do trabalho (opcional)", name: "link", widget: "string", required: false }
