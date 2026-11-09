@@ -674,3 +674,7 @@ footer { margin-top: auto; }
   margin: 0 0 6px;
   color: #3a5a80;
 }
+/* Cartões de portfólio e etiquetas */
+.card-resumo { margin: 0; color: #3a5a80; }
+.card-corpo .etiqueta { margin: 0; }
+.artigo .etiqueta { margin-bottom: 12px; }
