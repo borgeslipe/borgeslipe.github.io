@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Além do futebol | BORGESSFUT</title>
+  <link rel="icon" href="logo,png.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div id="cabecalho"></div>
+
+  <main class="pagina larga">
+    <h1>Além do futebol</h1>
+    <p class="lead">Notícias e histórias de outros esportes.</p>
+    <div class="cards-noticias" id="lista"></div>
+  </main>
+
+  <div id="rodape"></div>
+  <script src="site.js"></script>
+  <script>
+    var MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
+    function slug(t) {
+      return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+    function dataLonga(s) {
+      var p = (s || '').slice(0, 10).split('-');
+      if (p.length !== 3) return '';
+      return Number(p[2]) + ' de ' + MESES[Number(p[1]) - 1] + ' de ' + p[0];
+    }
+    function idDe(n) {
+      return slug(n.titulo) + '-' + (n.data || '').slice(0, 10);
+    }
+
+    var lista = document.getElementById('lista');
+
+    fetch('content/noticias.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var itens = (d.itens || []).filter(function (n) { return n.secao === 'Outros esportes'; })
+          .sort(function (a, b) { return (b.data || '').localeCompare(a.data || ''); });
+
+        if (!itens.length) {
+          lista.className = '';
+          lista.appendChild(el('p', 'vazio', 'Nenhuma notícia de outros esportes publicada ainda.'));
+          return;
+        }
+
+        itens.forEach(function (n) {
+          var a = el('a', 'card-noticia');
+          a.href = 'noticias.html?n=' + idDe(n);
+
+          var capa = el('div', 'card-capa');
+          if (n.imagem) {
+            var im = el('img');
+            im.src = n.imagem;
+            im.alt = '';
+            im.loading = 'lazy';
+            capa.appendChild(im);
+          }
+          a.appendChild(capa);
+
+          var corpo = el('div', 'card-corpo');
+          if (n.esporte) corpo.appendChild(el('span', 'etiqueta', n.esporte));
+          corpo.appendChild(el('h3', '', n.titulo));
+          if (n.data) corpo.appendChild(el('p', 'card-data', dataLonga(n.data)));
+          corpo.appendChild(el('span', 'card-ler', 'Ler a notícia ▶'));
+          a.appendChild(corpo);
+          lista.appendChild(a);
+        });
+      })
+      .catch(function () {
+        lista.className = '';
+        lista.appendChild(el('p', 'vazio', 'Não foi possível carregar as notícias.'));
+      });
+  </script>
+</body>
+</html>
