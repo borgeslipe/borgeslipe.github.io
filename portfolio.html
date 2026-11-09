@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfólio | BORGESSFUT</title>
+  <link rel="icon" href="logo,png.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div id="cabecalho"></div>
+
+  <main class="pagina larga">
+    <h1>Portfólio</h1>
+    <p class="lead">Alguns trabalhos de Felipe Borges.</p>
+    <div class="cards-noticias" id="lista"></div>
+  </main>
+
+  <div id="rodape"></div>
+  <script src="site.js"></script>
+  <script>
+    var MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
+    function el(tag, cls, txt) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (txt) e.textContent = txt;
+      return e;
+    }
+    function dataLonga(s) {
+      var p = (s || '').slice(0, 10).split('-');
+      if (p.length !== 3) return '';
+      return Number(p[2]) + ' de ' + MESES[Number(p[1]) - 1] + ' de ' + p[0];
+    }
+
+    var lista = document.getElementById('lista');
+
+    fetch('content/portfolio.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var itens = (d.itens || []).slice().sort(function (a, b) {
+          return (b.data || '').localeCompare(a.data || '');
+        });
+
+        if (!itens.length) {
+          lista.className = '';
+          lista.appendChild(el('p', 'vazio', 'Nenhum trabalho publicado ainda.'));
+          return;
+        }
+
+        itens.forEach(function (p) {
+          var temLink = p.link && /^https?:\/\//.test(p.link);
+          var c = el(temLink ? 'a' : 'div', 'card-noticia');
+          if (temLink) { c.href = p.link; c.target = '_blank'; c.rel = 'noopener'; }
+
+          var capa = el('div', 'card-capa');
+          if (p.imagem) {
+            var im = el('img');
+            im.src = p.imagem;
+            im.alt = '';
+            im.loading = 'lazy';
+            capa.appendChild(im);
+          }
+          c.appendChild(capa);
+
+          var corpo = el('div', 'card-corpo');
+          if (p.tipo) corpo.appendChild(el('span', 'etiqueta' + (p.tipo === 'Vídeo' ? '' : ' texto'), p.tipo));
+          corpo.appendChild(el('h3', '', p.titulo));
+          var linha = [p.veiculo, dataLonga(p.data)].filter(Boolean).join(' · ');
+          if (linha) corpo.appendChild(el('p', 'card-data', linha));
+          if (p.resumo) corpo.appendChild(el('p', 'card-resumo', p.resumo));
+          if (temLink) corpo.appendChild(el('span', 'card-ler', 'Ver trabalho ▶'));
+          c.appendChild(corpo);
+          lista.appendChild(c);
+        });
+      })
+      .catch(function () {
+        lista.className = '';
+        lista.appendChild(el('p', 'vazio', 'Não foi possível carregar o portfólio.'));
+      });
+  </script>
+</body>
+</html>
