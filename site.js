@@ -20,10 +20,13 @@
     }).join('');
   }
 
+  // Abas do menu: [nome do arquivo sem .html, texto que aparece]
   var paginas = [
     ['sobre', 'Sobre'],
     ['noticias', 'Notícias'],
+    ['alem-do-futebol', 'Além do futebol'],
     ['projetos', 'Projetos'],
+    ['portfolio', 'Portfólio'],
     ['contato', 'Contato']
   ];
   var atual = (location.pathname.split('/').pop() || 'index').replace('.html', '');
@@ -42,10 +45,7 @@
           '<img src="logo,png.png" alt="Logo BORGESSFUT">' +
           '<span>BORGESSFUT</span>' +
         '</a>' +
-        '<div class="lado">' +
-          '<nav>' + links + '</nav>' +
-          '<div class="redes">' + botoesRedes() + '</div>' +
-        '</div>' +
+        '<nav>' + links + '</nav>' +
       '</header>';
   }
 
