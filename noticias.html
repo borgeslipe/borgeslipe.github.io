@@ -49,7 +49,7 @@
       var t = texto || '';
       if (t.trim().charAt(0) === '<' && window.DOMPurify) {
         d.className = 'texto rico';
-               d.innerHTML = DOMPurify.sanitize(t.replace(/&nbsp;|\u00a0/g, ' '));
+        d.innerHTML = DOMPurify.sanitize(t.replace(/&nbsp;|\u00a0/g, ' '));
       } else {
         d.textContent = t;
       }
@@ -82,26 +82,41 @@
     }
 
     function mostrarLista(itens) {
-      if (!itens.length) {
+      var futebol = itens.filter(function (n) { return n.secao !== 'Outros esportes'; });
+      if (!futebol.length) {
         area.appendChild(el('p', 'vazio', 'Nenhuma notícia publicada ainda.'));
         return;
       }
       area.className = 'cards-noticias';
-      itens.forEach(function (n) { area.appendChild(cartao(n)); });
+      futebol.forEach(function (n) { area.appendChild(cartao(n)); });
     }
 
     function mostrarNoticia(n) {
+      var outros = (n.secao === 'Outros esportes');
       document.title = n.titulo + ' | BORGESSFUT';
       document.getElementById('titulo-pagina').style.display = 'none';
       area.className = 'artigo';
 
-      var v = el('a', 'voltar', '← Voltar às notícias');
-      v.href = 'noticias.html';
+      // Marca no menu a aba certa
+      if (outros) {
+        document.querySelectorAll('nav a').forEach(function (a) {
+          a.classList.toggle('ativo', a.getAttribute('href') === 'alem-do-futebol.html');
+        });
+      }
+
+      var v = el('a', 'voltar', outros ? '← Voltar a Além do futebol' : '← Voltar às notícias');
+      v.href = outros ? 'alem-do-futebol.html' : 'noticias.html';
       area.appendChild(v);
+
+      if (outros && n.esporte) {
+        var caixa = el('div');
+        caixa.appendChild(el('span', 'etiqueta', n.esporte));
+        area.appendChild(caixa);
+      }
 
       area.appendChild(el('h1', '', n.titulo));
       if (n.subtitulo) area.appendChild(el('p', 'subtitulo-artigo', n.subtitulo));
-            area.appendChild(el('p', 'autor-artigo', 'Por Felipe Borges'));
+      area.appendChild(el('p', 'autor-artigo', 'Por Felipe Borges'));
       if (n.data) area.appendChild(el('p', 'data-artigo', dataLonga(n.data)));
       if (n.imagem) {
         var im = el('img');
