@@ -678,3 +678,50 @@ footer { margin-top: auto; }
 .card-resumo { margin: 0; color: #3a5a80; }
 .card-corpo .etiqueta { margin: 0; }
 .artigo .etiqueta { margin-bottom: 12px; }
+/* Botão do menu (só aparece em telas pequenas) */
+.menu-btn { display: none; }
+
+@media (max-width: 960px) {
+  header { flex-wrap: wrap; }
+
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .menu-btn span {
+    display: block;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  header.aberto .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.aberto .menu-btn span:nth-child(2) { opacity: 0; }
+  header.aberto .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  header nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    padding: 6px 0 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  header.aberto nav { display: flex; }
+  header nav a {
+    padding: 12px 4px;
+    font-size: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  header nav a:last-child { border-bottom: none; }
+}
