@@ -45,8 +45,22 @@
           '<img src="logo,png.png" alt="Logo BORGESSFUT">' +
           '<span>BORGESSFUT</span>' +
         '</a>' +
+        '<button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false">' +
+          '<span></span><span></span><span></span>' +
+        '</button>' +
         '<nav>' + links + '</nav>' +
       '</header>';
+
+    // Abre e fecha o menu no celular
+    var hdr = document.querySelector('header');
+    var btn = document.getElementById('menu-btn');
+    if (hdr && btn) {
+      btn.addEventListener('click', function () {
+        var aberto = hdr.classList.toggle('aberto');
+        btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+        btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+      });
+    }
   }
 
   var rod = document.getElementById('rodape');
