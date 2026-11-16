@@ -70,14 +70,52 @@ collections:
                   - { label: "Título do vídeo", name: "titulo", widget: "string" }
                   - { label: "Link do vídeo (YouTube, Instagram, TikTok...)", name: "link", widget: "string" }
 
-      - name: "portfolio"
-        label: "Portfólio"
-        file: "content/portfolio.json"
+      - name: "transmissoes"
+        label: "Portfólio: Transmissões"
+        file: "content/transmissoes.json"
         fields:
-          - label: "Trabalhos"
-            label_singular: "Trabalho"
+          - label: "Transmissões"
+            label_singular: "Transmissão"
             name: "itens"
             widget: "list"
+            add_to_top: true
+            summary: "{{fields.data}} · {{fields.jogo}}"
+            fields:
+              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Esporte", name: "esporte", widget: "string", default: "Futebol" }
+              - { label: "Jogo ou evento", name: "jogo", widget: "string" }
+              - { label: "Competição", name: "competicao", widget: "string" }
+              - { label: "Função (ex.: Repórter Brasil, Comentarista, Produtor)", name: "funcao", widget: "string" }
+              - { label: "Link do vídeo (YouTube)", name: "link", widget: "string", required: false }
+              - { label: "Imagem de capa (só se o link não for do YouTube)", name: "imagem", widget: "image", required: false }
+
+      - name: "programas"
+        label: "Portfólio: Programas esportivos"
+        file: "content/programas.json"
+        fields:
+          - label: "Programas"
+            label_singular: "Programa"
+            name: "itens"
+            widget: "list"
+            add_to_top: true
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Nome do programa ou edição", name: "titulo", widget: "string" }
+              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
+              - { label: "Sua função", name: "funcao", widget: "string", required: false }
+              - { label: "Descrição", name: "descricao", widget: "text", required: false }
+              - { label: "Link do vídeo (YouTube)", name: "link", widget: "string", required: false }
+              - { label: "Imagem de capa (só se o link não for do YouTube)", name: "imagem", widget: "image", required: false }
+
+      - name: "portfolio"
+        label: "Portfólio: Matérias de fora"
+        file: "content/portfolio.json"
+        fields:
+          - label: "Matérias"
+            label_singular: "Matéria"
+            name: "itens"
+            widget: "list"
+            add_to_top: true
             summary: "{{fields.titulo}}"
             fields:
               - { label: "Título", name: "titulo", widget: "string" }
@@ -86,4 +124,4 @@ collections:
               - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
               - { label: "Resumo", name: "resumo", widget: "text", required: false }
               - { label: "Imagem", name: "imagem", widget: "image", required: false }
-              - { label: "Link do trabalho (opcional)", name: "link", widget: "string", required: false }
+              - { label: "Link da matéria", name: "link", widget: "string", required: false }
