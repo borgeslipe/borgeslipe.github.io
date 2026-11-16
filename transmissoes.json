@@ -1,0 +1,508 @@
+{
+  "itens": [
+    {
+      "data": "2026-11-18",
+      "esporte": "Futebol",
+      "jogo": "Flamengo x Athletico PR",
+      "competicao": "Brasileirão",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-17",
+      "esporte": "Futebol",
+      "jogo": "Singapura x Brasil",
+      "competicao": "Amistoso",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-14",
+      "esporte": "Futebol",
+      "jogo": "Japão x Brasil",
+      "competicao": "Amistoso",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-08",
+      "esporte": "Automobilismo (F1)",
+      "jogo": "Grand Prix de São Paulo",
+      "competicao": "Fórmula 1",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-05",
+      "esporte": "Futebol",
+      "jogo": "Leverkusen x Marseille",
+      "competicao": "Europa League",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-03",
+      "esporte": "Futebol",
+      "jogo": "Barcelona x Aston Villa",
+      "competicao": "Champions League",
+      "funcao": "Repórter Aston Villa",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-11-01",
+      "esporte": "Futebol",
+      "jogo": "Grêmio x Atlético Mineiro",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Atlético Mineiro",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-29",
+      "esporte": "Futebol",
+      "jogo": "Vasco x Flamengo",
+      "competicao": "Brasileirão",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-25",
+      "esporte": "Futebol",
+      "jogo": "Liverpool x Brighton",
+      "competicao": "Premier League",
+      "funcao": "Repórter Brighton",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-22",
+      "esporte": "Futebol",
+      "jogo": "Flamengo x Estudiantes",
+      "competicao": "Libertadores",
+      "funcao": "Repórter Estudiantes",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-18",
+      "esporte": "Futebol",
+      "jogo": "Fluminense x Santos",
+      "competicao": "Brasileirão",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-17",
+      "esporte": "Futebol",
+      "jogo": "Real Betis x Barcelona",
+      "competicao": "La Liga",
+      "funcao": "Repórter Real Betis",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-14",
+      "esporte": "Futebol",
+      "jogo": "Fluminense x Palmeiras",
+      "competicao": "Libertadores",
+      "funcao": "Repórter Palmeiras",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-12",
+      "esporte": "Futebol",
+      "jogo": "Coritiba x Botafogo",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Botafogo",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-11",
+      "esporte": "Futebol",
+      "jogo": "Liverpool x Man. City",
+      "competicao": "Premier League",
+      "funcao": "Repórter Liverpool",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-08",
+      "esporte": "Futebol",
+      "jogo": "Santos x Flamengo",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Santos",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-04",
+      "esporte": "Futebol",
+      "jogo": "Holanda x Sérvia",
+      "competicao": "Nations League",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-10-03",
+      "esporte": "Futebol",
+      "jogo": "Índia x Brasil",
+      "competicao": "Amistoso",
+      "funcao": "Repórter Índia / Brasil",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-29",
+      "esporte": "Futebol",
+      "jogo": "Espanha x Croácia",
+      "competicao": "Nations League",
+      "funcao": "Repórter Croácia",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-27",
+      "esporte": "Futebol",
+      "jogo": "Noruega x Portugal",
+      "competicao": "Nations League",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-24",
+      "esporte": "Futebol",
+      "jogo": "Holanda x Alemanha",
+      "competicao": "Nations League",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-20",
+      "esporte": "Futebol",
+      "jogo": "Atl. de Madrid x Real Madrid",
+      "competicao": "La Liga",
+      "funcao": "Repórter Real Madrid",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-19",
+      "esporte": "Futebol",
+      "jogo": "Vasco x Coritiba",
+      "competicao": "Brasileirão",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-17",
+      "esporte": "Futebol",
+      "jogo": "Flamengo x Ind. Del Valle",
+      "competicao": "Libertadores",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-16",
+      "esporte": "Futebol",
+      "jogo": "LDU x Palmeiras",
+      "competicao": "Libertadores",
+      "funcao": "Repórter LDU",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-13",
+      "esporte": "Futebol",
+      "jogo": "Flamengo x Corinthians",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Corinthians",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-10",
+      "esporte": "Futebol",
+      "jogo": "Ind. Del Valle x Flamengo",
+      "competicao": "Libertadores",
+      "funcao": "Repórter Ind. Del Valle",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-09",
+      "esporte": "Futebol",
+      "jogo": "Palmeiras x LDU",
+      "competicao": "Libertadores",
+      "funcao": "Apresentador",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-06",
+      "esporte": "Futebol",
+      "jogo": "Arsenal x Chelsea",
+      "competicao": "Premier League",
+      "funcao": "Repórter Arsenal",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-06",
+      "esporte": "Futebol",
+      "jogo": "Botafogo x Palmeiras",
+      "competicao": "Brasileirão",
+      "funcao": "Apresentador",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-03",
+      "esporte": "Futebol",
+      "jogo": "Grêmio x Internacional",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Grêmio",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-01",
+      "esporte": "Futebol",
+      "jogo": "Atlético Mineiro x Cruzeiro",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Cruzeiro",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-27",
+      "esporte": "Futebol",
+      "jogo": "Internacional x Grêmio",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Grêmio",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-25",
+      "esporte": "Futebol",
+      "jogo": "Cruzeiro x Atlético Mineiro",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Cruzeiro",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-22",
+      "esporte": "Futebol",
+      "jogo": "Cruzeiro x Flamengo",
+      "competicao": "Brasileirão",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-19",
+      "esporte": "Futebol",
+      "jogo": "Flamengo x Cruzeiro",
+      "competicao": "Libertadores",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-16",
+      "esporte": "Futebol",
+      "jogo": "Vasco x Santos",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Vasco",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-15",
+      "esporte": "Futebol",
+      "jogo": "Fluminense x Palmeiras",
+      "competicao": "Brasileirão",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-12",
+      "esporte": "Futebol",
+      "jogo": "Cruzeiro x Flamengo",
+      "competicao": "Libertadores",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-08-04",
+      "esporte": "Futebol",
+      "jogo": "Remo x Santos",
+      "competicao": "Copa do Brasil",
+      "funcao": "Repórter Santos",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-29",
+      "esporte": "Futebol",
+      "jogo": "Vasco x Ind. Medellín",
+      "competicao": "Sulamericana",
+      "funcao": "Repórter Ind. Medellín",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-29",
+      "esporte": "Futebol",
+      "jogo": "Fluminense x Bahia",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Fluminense",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-26",
+      "esporte": "Futebol",
+      "jogo": "Cruzeiro x Botafogo",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Botafogo",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-22",
+      "esporte": "Futebol",
+      "jogo": "Chapecoense x Flamengo",
+      "competicao": "Brasileirão",
+      "funcao": "Produtor",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-19",
+      "esporte": "Futebol",
+      "jogo": "Argentina x Espanha",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Argentina",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-11",
+      "esporte": "Futebol",
+      "jogo": "Inglaterra x Noruega",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Noruega",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-07",
+      "esporte": "Futebol",
+      "jogo": "Argentina x Egito",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Argentina",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-05",
+      "esporte": "Futebol",
+      "jogo": "Brasil x Noruega",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Noruega",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-30",
+      "esporte": "Futebol",
+      "jogo": "França x Suécia",
+      "competicao": "Copa do Mundo",
+      "funcao": "Comentarista",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-29",
+      "esporte": "Futebol",
+      "jogo": "Brasil x Japão",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Brasil",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-28",
+      "esporte": "Futebol",
+      "jogo": "África do Sul x Canadá",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Canadá",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-25",
+      "esporte": "Futebol",
+      "jogo": "Paraguai x Austrália",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Paraguai",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-24",
+      "esporte": "Futebol",
+      "jogo": "Brasil x Escócia",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Escócia",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-16",
+      "esporte": "Futebol",
+      "jogo": "Argentina x Argélia",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Argentina",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-13",
+      "esporte": "Futebol",
+      "jogo": "Brasil x Marrocos",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Brasil",
+      "link": "",
+      "imagem": ""
+    },
+    {
+      "data": "2026-06-12",
+      "esporte": "Futebol",
+      "jogo": "Canadá x Bósnia",
+      "competicao": "Copa do Mundo",
+      "funcao": "Repórter Bósnia",
+      "link": "",
+      "imagem": ""
+    }
+  ]
+}
