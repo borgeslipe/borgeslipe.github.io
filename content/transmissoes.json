@@ -1,6 +1,13 @@
 {
   "itens": [
     {
+      "esporte": "Futebol",
+      "data": "2026-11-21",
+      "jogo": "Palmeiras x Flamengo",
+      "competicao": "Brasileirão",
+      "funcao": "Repórter Palmeiras"
+    },
+    {
       "data": "2026-11-18",
       "esporte": "Futebol",
       "jogo": "Flamengo x Athletico PR",
