@@ -348,7 +348,7 @@
       "jogo": "Cruzeiro x Flamengo",
       "competicao": "Libertadores",
       "funcao": "Comentarista",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=h5wEw-A-djw",
       "imagem": ""
     },
     {
@@ -357,16 +357,7 @@
       "jogo": "Remo x Santos",
       "competicao": "Copa do Brasil",
       "funcao": "Repórter Santos",
-      "link": "",
-      "imagem": ""
-    },
-    {
-      "data": "2026-07-29",
-      "esporte": "Futebol",
-      "jogo": "Vasco x Ind. Medellín",
-      "competicao": "Sulamericana",
-      "funcao": "Repórter Ind. Medellín",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=dQdG2okUB6o",
       "imagem": ""
     },
     {
@@ -375,7 +366,16 @@
       "jogo": "Fluminense x Bahia",
       "competicao": "Brasileirão",
       "funcao": "Repórter Fluminense",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=nfQYXnJrcXM",
+      "imagem": ""
+    },
+    {
+      "data": "2026-07-29",
+      "esporte": "Futebol",
+      "jogo": "Vasco x Ind. Medellín",
+      "competicao": "Sulamericana",
+      "funcao": "Repórter Ind. Medellín",
+      "link": "https://www.youtube.com/watch?v=7Py5A0xoZlU",
       "imagem": ""
     },
     {
@@ -384,7 +384,7 @@
       "jogo": "Cruzeiro x Botafogo",
       "competicao": "Brasileirão",
       "funcao": "Repórter Botafogo",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=uaB_lqJOqvs",
       "imagem": ""
     },
     {
@@ -393,7 +393,7 @@
       "jogo": "Chapecoense x Flamengo",
       "competicao": "Brasileirão",
       "funcao": "Produtor",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=b8ymtnUh140",
       "imagem": ""
     },
     {
