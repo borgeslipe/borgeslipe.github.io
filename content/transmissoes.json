@@ -249,16 +249,7 @@
       "jogo": "Palmeiras x LDU",
       "competicao": "Libertadores",
       "funcao": "Apresentador",
-      "link": "",
-      "imagem": ""
-    },
-    {
-      "data": "2026-09-06",
-      "esporte": "Futebol",
-      "jogo": "Arsenal x Chelsea",
-      "competicao": "Premier League",
-      "funcao": "Repórter Arsenal",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=Plnx1hP_Fzs",
       "imagem": ""
     },
     {
@@ -267,7 +258,16 @@
       "jogo": "Botafogo x Palmeiras",
       "competicao": "Brasileirão",
       "funcao": "Apresentador",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=adz4sCwWyUE",
+      "imagem": ""
+    },
+    {
+      "data": "2026-09-06",
+      "esporte": "Futebol",
+      "jogo": "Arsenal x Chelsea",
+      "competicao": "Premier League",
+      "funcao": "Repórter Arsenal",
+      "link": "https://www.youtube.com/live/O0LVFbZs5xY?si=MCgs_NJ8lBOnir8v",
       "imagem": ""
     },
     {
@@ -276,7 +276,7 @@
       "jogo": "Grêmio x Internacional",
       "competicao": "Copa do Brasil",
       "funcao": "Repórter Grêmio",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=d1YeQLwIxfU",
       "imagem": ""
     },
     {
@@ -285,7 +285,7 @@
       "jogo": "Atlético Mineiro x Cruzeiro",
       "competicao": "Copa do Brasil",
       "funcao": "Repórter Cruzeiro",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=b20oT0FNbLY",
       "imagem": ""
     },
     {
@@ -294,7 +294,7 @@
       "jogo": "Internacional x Grêmio",
       "competicao": "Copa do Brasil",
       "funcao": "Repórter Grêmio",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=4TEjGXY6m6I",
       "imagem": ""
     },
     {
@@ -303,7 +303,7 @@
       "jogo": "Cruzeiro x Atlético Mineiro",
       "competicao": "Copa do Brasil",
       "funcao": "Repórter Cruzeiro",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=z0wUs7hV0KU",
       "imagem": ""
     },
     {
@@ -312,7 +312,7 @@
       "jogo": "Cruzeiro x Flamengo",
       "competicao": "Brasileirão",
       "funcao": "Comentarista",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=8TjYFjIl-FM",
       "imagem": ""
     },
     {
@@ -321,7 +321,7 @@
       "jogo": "Flamengo x Cruzeiro",
       "competicao": "Libertadores",
       "funcao": "Comentarista",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=-xEylpxheWs",
       "imagem": ""
     },
     {
@@ -330,7 +330,7 @@
       "jogo": "Vasco x Santos",
       "competicao": "Brasileirão",
       "funcao": "Repórter Vasco",
-      "link": "",
+      "link": "https://www.youtube.com/live/WnBXIuRIJ18",
       "imagem": ""
     },
     {
@@ -339,7 +339,7 @@
       "jogo": "Fluminense x Palmeiras",
       "competicao": "Brasileirão",
       "funcao": "Produtor",
-      "link": "",
+      "link": "https://www.youtube.com/watch?v=DpZ2oV-g3qI",
       "imagem": ""
     },
     {
