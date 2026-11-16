@@ -42,7 +42,7 @@
     cab.outerHTML =
       '<header>' +
         '<a href="index.html" class="marca">' +
-          '<img src="logo,png.png" alt="Logo BORGESSFUT">' +
+                  '<img src="logo-site.png" alt="Logo BORGESSFUT">' +
           '<span>BORGESSFUT</span>' +
         '</a>' +
         '<button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false">' +
