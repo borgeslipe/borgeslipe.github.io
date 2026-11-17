@@ -912,3 +912,9 @@ footer { margin-top: auto; }
   .destaque-capa { order: -1; min-height: 0; aspect-ratio: 16 / 9; }
   .destaque-texto { padding: 22px; }
 }
+/* Destaque: foto sempre em 16:9, sem corte */
+.destaque { grid-template-columns: 1fr 1.3fr; align-items: center; }
+.destaque-capa { aspect-ratio: 16 / 9; min-height: 0; align-self: center; }
+@media (max-width: 820px) {
+  .destaque { grid-template-columns: 1fr; }
+}
