@@ -9,7 +9,7 @@ from urllib.parse import unquote
 
 from PIL import Image, ImageOps
 
-SITE = 'https://borgeslipe.github.io'  # se o endereço do site mudar, troque só esta linha
+SITE = 'https://borgessfut.com.br'
 NOME = 'BORGESSFUT'
 AUTOR = 'Por Felipe Borges'
 MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.']
