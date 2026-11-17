@@ -918,3 +918,11 @@ footer { margin-top: auto; }
 @media (max-width: 820px) {
   .destaque { grid-template-columns: 1fr; }
 }
+/* Destaque: espaço em volta da foto */
+.destaque { padding: 20px; gap: 28px; }
+.destaque-capa { border-radius: 10px; overflow: hidden; }
+.destaque-texto { padding: 12px 0 12px 12px; }
+@media (max-width: 820px) {
+  .destaque { gap: 18px; }
+  .destaque-texto { padding: 4px 4px 8px; }
+}
