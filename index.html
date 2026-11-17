@@ -47,6 +47,13 @@
   </div>
 
   <div id="rodape"></div>
+    <section class="ultimas" id="ultimas">
+    <div class="ultimas-topo">
+      <h2>Últimas notícias</h2>
+      <a class="ver-todas" href="noticias.html">Ver todas as notícias ▶</a>
+    </div>
+    <div id="ultimas-area"></div>
+  </section>
   <script src="site.js"></script>
   <script>
     function slug(t) {
@@ -89,6 +96,92 @@
       });
 
     // Bolinhas do rodapé da capa
+        // ---------- Últimas notícias ----------
+    // Troque para true se você ativou o programa que gera as páginas de cada notícia
+    var PAGINAS_PRONTAS = false;
+
+    var MESES_CURTOS = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
+    function dataLonga(s) {
+      var p = (s || '').slice(0, 10).split('-');
+      if (p.length !== 3) return '';
+      return Number(p[2]) + ' de ' + MESES_CURTOS[Number(p[1]) - 1] + ' de ' + p[0];
+    }
+    function idDe(n) {
+      return slug(n.titulo) + '-' + (n.data || '').slice(0, 10);
+    }
+    function linkNoticia(n) {
+      return PAGINAS_PRONTAS ? 'noticia/' + idDe(n) + '.html' : 'noticias.html?n=' + idDe(n);
+    }
+
+    function fotoDe(n, caixa) {
+      if (!n.imagem) return;
+      var im = el('img');
+      im.src = n.imagem;
+      im.alt = '';
+      im.loading = 'lazy';
+      caixa.appendChild(im);
+    }
+
+    function cartaoDestaque(n) {
+      var a = el('a', 'destaque');
+      a.href = linkNoticia(n);
+
+      var texto = el('div', 'destaque-texto');
+      texto.appendChild(el('span', 'etiqueta', 'Futebol'));
+      texto.appendChild(el('h3', '', n.titulo));
+      if (n.subtitulo) texto.appendChild(el('p', 'destaque-sub', n.subtitulo));
+      if (n.data) texto.appendChild(el('p', 'destaque-data', dataLonga(n.data)));
+      texto.appendChild(el('span', 'card-ler', 'Ler a notícia ▶'));
+      a.appendChild(texto);
+
+      var capa = el('div', 'destaque-capa');
+      fotoDe(n, capa);
+      a.appendChild(capa);
+      return a;
+    }
+
+    function cartaoNoticia(n) {
+      var a = el('a', 'card-noticia');
+      a.href = linkNoticia(n);
+
+      var capa = el('div', 'card-capa');
+      fotoDe(n, capa);
+      a.appendChild(capa);
+
+      var corpo = el('div', 'card-corpo');
+      corpo.appendChild(el('h3', '', n.titulo));
+      if (n.data) corpo.appendChild(el('p', 'card-data', dataLonga(n.data)));
+      corpo.appendChild(el('span', 'card-ler', 'Ler a notícia ▶'));
+      a.appendChild(corpo);
+      return a;
+    }
+
+    var areaUltimas = document.getElementById('ultimas-area');
+    fetch('content/noticias.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var itens = (d.itens || [])
+          .filter(function (n) { return n.secao !== 'Outros esportes'; })
+          .sort(function (a, b) { return (b.data || '').localeCompare(a.data || ''); });
+
+        if (!itens.length) {
+          areaUltimas.appendChild(el('p', 'vazio', 'Nenhuma notícia publicada ainda.'));
+          return;
+        }
+
+        areaUltimas.appendChild(cartaoDestaque(itens[0]));
+
+        var outras = itens.slice(1, 4);
+        if (outras.length) {
+          var grade = el('div', 'cards-noticias');
+          outras.forEach(function (n) { grade.appendChild(cartaoNoticia(n)); });
+          areaUltimas.appendChild(grade);
+        }
+      })
+      .catch(function () {
+        areaUltimas.appendChild(el('p', 'vazio', 'Não foi possível carregar as notícias.'));
+      });
     var BOLA =
       '<svg viewBox="-18 -18 36 36" aria-hidden="true">' +
       '<circle r="16" fill="none" stroke="currentColor" stroke-width="2.4"/>' +
