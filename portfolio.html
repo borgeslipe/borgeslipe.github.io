@@ -35,16 +35,22 @@
 
     <div id="aba-transmissoes">
       <div class="filtros">
-        <input type="search" id="busca" placeholder="Buscar jogo, time ou competição" aria-label="Buscar">
-        <select id="f-comp" aria-label="Competição"><option value="">Todas as competições</option></select>
-        <select id="f-func" aria-label="Função"><option value="">Todas as funções</option></select>
+        <input type="search" id="tx-busca" placeholder="Buscar jogo, time ou competição" aria-label="Buscar">
+        <select id="tx-f1" aria-label="Competição"><option value="">Todas as competições</option></select>
+        <select id="tx-f2" aria-label="Função"><option value="">Todas as funções</option></select>
       </div>
-      <p class="contagem" id="contagem"></p>
-      <div class="tabela" id="tabela"></div>
+      <p class="contagem" id="tx-contagem"></p>
+      <div class="tabela" id="tx-tabela"></div>
     </div>
 
     <div id="aba-programas" hidden>
-      <div class="cards-noticias" id="lista-programas"></div>
+      <div class="filtros">
+        <input type="search" id="pg-busca" placeholder="Buscar programa ou função" aria-label="Buscar">
+        <select id="pg-f1" aria-label="Programa"><option value="">Todos os programas</option></select>
+        <select id="pg-f2" aria-label="Função"><option value="">Todas as funções</option></select>
+      </div>
+      <p class="contagem" id="pg-contagem"></p>
+      <div class="tabela" id="pg-tabela"></div>
     </div>
 
     <div id="aba-materias" hidden>
@@ -133,162 +139,141 @@
       if (prev) prev.classList.remove('on');
     }
 
-    // ---------- Aba Transmissões ----------
-    var TRANSMISSOES = [];
-    var tabela = document.getElementById('tabela');
+    // ---------- Lista interativa (usada em Transmissões e Programas) ----------
+    function tabelaInterativa(o) {
+      var itens = porData(o.itens);
+      var tabela = document.getElementById(o.prefixo + '-tabela');
+      var campoBusca = document.getElementById(o.prefixo + '-busca');
+      var sel1 = document.getElementById(o.prefixo + '-f1');
+      var sel2 = document.getElementById(o.prefixo + '-f2');
+      var contagem = document.getElementById(o.prefixo + '-contagem');
 
-    function linha(t) {
-      var wrap = el('div', 'linha');
-      var tr = el('div', 'tr');
-      tr.tabIndex = 0;
-      tr.setAttribute('role', 'button');
-      tr.setAttribute('aria-expanded', 'false');
+      function linha(t) {
+        var wrap = el('div', 'linha');
+        var tr = el('div', 'tr');
+        tr.tabIndex = 0;
+        tr.setAttribute('role', 'button');
+        tr.setAttribute('aria-expanded', 'false');
 
-      tr.appendChild(el('span', 'c-data', dataCurta(t.data)));
-      tr.appendChild(el('span', 'c-jogo', t.jogo));
-      tr.appendChild(el('span', 'c-comp', t.competicao));
-      tr.appendChild(el('span', 'c-func', t.funcao));
-      tr.appendChild(el('span', 'c-meta', [dataCurta(t.data), t.competicao, t.funcao].filter(Boolean).join(' · ')));
-      tr.appendChild(el('span', 'c-seta', '▾'));
-      wrap.appendChild(tr);
+        tr.appendChild(el('span', 'c-data', dataCurta(t.data)));
+        tr.appendChild(el('span', 'c-jogo', o.titulo(t)));
+        tr.appendChild(el('span', 'c-comp', o.col3(t)));
+        tr.appendChild(el('span', 'c-func', t.funcao));
+        tr.appendChild(el('span', 'c-meta', [dataCurta(t.data), o.col3(t), t.funcao].filter(Boolean).join(' · ')));
+        tr.appendChild(el('span', 'c-seta', '▾'));
+        wrap.appendChild(tr);
 
-      var thumb = thumbDe(t);
-      var temLink = linkOk(t.link);
-      var det = el('div', 'det');
-      var caixa = null;
+        var thumb = thumbDe(t);
+        var temLink = linkOk(t.link);
+        var det = el('div', 'det');
+        var caixa = null;
 
-      if (thumb || temLink) {
-        caixa = el(temLink ? 'a' : 'div', 'det-thumb');
+        if (thumb || temLink) {
+          caixa = el(temLink ? 'a' : 'div', 'det-thumb');
+          if (temLink) {
+            caixa.href = t.link;
+            caixa.target = '_blank';
+            caixa.rel = 'noopener';
+            caixa.setAttribute('aria-label', 'Assistir ' + o.titulo(t));
+          }
+          caixa.appendChild(el('span', 'play', '▶'));
+          det.appendChild(caixa);
+        }
+
+        var info = el('div', 'det-info');
+        info.appendChild(el('h3', '', o.titulo(t)));
+        var sub = o.sub(t);
+        if (sub) info.appendChild(el('p', '', sub));
+        if (t.funcao) info.appendChild(el('p', '', 'Função: ' + t.funcao));
+        if (t.data) info.appendChild(el('p', '', dataLonga(t.data)));
         if (temLink) {
-          caixa.href = t.link;
-          caixa.target = '_blank';
-          caixa.rel = 'noopener';
-          caixa.setAttribute('aria-label', 'Assistir ' + t.jogo);
+          var b = el('a', 'botao', 'Assistir ▶');
+          b.href = t.link;
+          b.target = '_blank';
+          b.rel = 'noopener';
+          info.appendChild(b);
+        } else {
+          info.appendChild(el('p', '', 'Vídeo em breve.'));
         }
-        caixa.appendChild(el('span', 'play', '▶'));
-        det.appendChild(caixa);
-      }
+        det.appendChild(info);
+        wrap.appendChild(det);
 
-      var info = el('div', 'det-info');
-      info.appendChild(el('h3', '', t.jogo));
-      var sub = [t.competicao, (t.esporte && t.esporte !== 'Futebol') ? t.esporte : ''].filter(Boolean).join(' · ');
-      if (sub) info.appendChild(el('p', '', sub));
-      if (t.funcao) info.appendChild(el('p', '', 'Função: ' + t.funcao));
-      if (t.data) info.appendChild(el('p', '', dataLonga(t.data)));
-      if (temLink) {
-        var b = el('a', 'botao', 'Assistir ▶');
-        b.href = t.link;
-        b.target = '_blank';
-        b.rel = 'noopener';
-        info.appendChild(b);
-      } else {
-        info.appendChild(el('p', '', 'Vídeo em breve.'));
-      }
-      det.appendChild(info);
-      wrap.appendChild(det);
-
-      function alternar() {
-        var aberta = wrap.classList.toggle('aberta');
-        tr.setAttribute('aria-expanded', aberta ? 'true' : 'false');
-        if (aberta && caixa && thumb && !caixa.querySelector('img')) {
-          var im = el('img');
-          im.alt = '';
-          im.src = thumb;
-          caixa.insertBefore(im, caixa.firstChild);
+        function alternar() {
+          var aberta = wrap.classList.toggle('aberta');
+          tr.setAttribute('aria-expanded', aberta ? 'true' : 'false');
+          if (aberta && caixa && thumb && !caixa.querySelector('img')) {
+            var im = el('img');
+            im.alt = '';
+            im.src = thumb;
+            caixa.insertBefore(im, caixa.firstChild);
+          }
+          esconderPrev();
         }
-        esconderPrev();
-      }
-      tr.addEventListener('click', alternar);
-      tr.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); alternar(); }
-      });
-
-      if (thumb && PODE_HOVER) {
-        tr.addEventListener('mouseenter', function (e) {
-          if (!wrap.classList.contains('aberta')) mostrarPrev(thumb, e.clientX, e.clientY);
+        tr.addEventListener('click', alternar);
+        tr.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); alternar(); }
         });
-        tr.addEventListener('mousemove', function (e) { moverPrev(e.clientX, e.clientY); });
-        tr.addEventListener('mouseleave', esconderPrev);
-      }
-      return wrap;
-    }
 
-    function desenhar() {
-      var q = norm(document.getElementById('busca').value);
-      var comp = document.getElementById('f-comp').value;
-      var func = document.getElementById('f-func').value;
-
-      var lista = TRANSMISSOES.filter(function (t) {
-        if (comp && t.competicao !== comp) return false;
-        if (func && (t.funcao || '').split(' ')[0] !== func) return false;
-        if (q && norm([t.jogo, t.competicao, t.funcao, t.esporte].join(' ')).indexOf(q) < 0) return false;
-        return true;
-      });
-
-      tabela.innerHTML = '';
-      esconderPrev();
-      document.getElementById('contagem').textContent =
-        lista.length + (lista.length === 1 ? ' transmissão' : ' transmissões');
-
-      if (!lista.length) {
-        tabela.appendChild(el('p', 'vazio', 'Nenhuma transmissão encontrada.'));
-        return;
+        if (thumb && PODE_HOVER) {
+          tr.addEventListener('mouseenter', function (e) {
+            if (!wrap.classList.contains('aberta')) mostrarPrev(thumb, e.clientX, e.clientY);
+          });
+          tr.addEventListener('mousemove', function (e) { moverPrev(e.clientX, e.clientY); });
+          tr.addEventListener('mouseleave', esconderPrev);
+        }
+        return wrap;
       }
 
-      var cab = el('div', 'tr tr-cab');
-      ['Data', 'Jogo', 'Competição', 'Função', ''].forEach(function (x) { cab.appendChild(el('span', '', x)); });
-      tabela.appendChild(cab);
+      function desenhar() {
+        var q = norm(campoBusca.value);
+        var v1 = sel1.value;
+        var v2 = sel2.value;
 
-      var mesAtual = '';
-      lista.forEach(function (t) {
-        var m = mesAno(t.data);
-        if (m !== mesAtual) { mesAtual = m; tabela.appendChild(el('div', 'mes', m)); }
-        tabela.appendChild(linha(t));
-      });
-    }
+        var lista = itens.filter(function (t) {
+          if (v1 && o.filtro1(t) !== v1) return false;
+          if (v2 && (t.funcao || '').split(' ')[0] !== v2) return false;
+          if (q && norm(o.busca(t)).indexOf(q) < 0) return false;
+          return true;
+        });
 
-    function preencherFiltros() {
-      var comps = {}, funcs = {};
-      TRANSMISSOES.forEach(function (t) {
-        if (t.competicao) comps[t.competicao] = true;
+        tabela.innerHTML = '';
+        esconderPrev();
+        contagem.textContent = lista.length + (lista.length === 1 ? o.singular : o.plural);
+
+        if (!lista.length) {
+          tabela.appendChild(el('p', 'vazio', o.vazio));
+          return;
+        }
+
+        var cab = el('div', 'tr tr-cab');
+        o.cab.concat(['']).forEach(function (x) { cab.appendChild(el('span', '', x)); });
+        tabela.appendChild(cab);
+
+        var mesAtual = '';
+        lista.forEach(function (t) {
+          var m = mesAno(t.data);
+          if (m !== mesAtual) { mesAtual = m; tabela.appendChild(el('div', 'mes', m)); }
+          tabela.appendChild(linha(t));
+        });
+      }
+
+      // Opções dos filtros
+      var op1 = {}, op2 = {};
+      itens.forEach(function (t) {
+        var a = o.filtro1(t);
+        if (a) op1[a] = true;
         var f = (t.funcao || '').split(' ')[0];
-        if (f) funcs[f] = true;
+        if (f) op2[f] = true;
       });
-      var sc = document.getElementById('f-comp');
-      Object.keys(comps).sort().forEach(function (c) {
-        var o = el('option', '', c); o.value = c; sc.appendChild(o);
+      Object.keys(op1).sort().forEach(function (c) {
+        var op = el('option', '', c); op.value = c; sel1.appendChild(op);
       });
-      var sf = document.getElementById('f-func');
-      Object.keys(funcs).sort().forEach(function (f) {
-        var o = el('option', '', f); o.value = f; sf.appendChild(o);
+      Object.keys(op2).sort().forEach(function (f) {
+        var op = el('option', '', f); op.value = f; sel2.appendChild(op);
       });
-    }
 
-    // ---------- Aba Programas ----------
-    function cartaoPrograma(p) {
-      var temLink = linkOk(p.link);
-      var c = el(temLink ? 'a' : 'div', 'card-noticia');
-      if (temLink) { c.href = p.link; c.target = '_blank'; c.rel = 'noopener'; }
-
-      var capa = el('div', 'card-capa');
-      var th = thumbDe(p);
-      if (th) {
-        var im = el('img');
-        im.src = th;
-        im.alt = '';
-        im.loading = 'lazy';
-        capa.appendChild(im);
-      }
-      c.appendChild(capa);
-
-      var corpo = el('div', 'card-corpo');
-      corpo.appendChild(el('h3', '', p.titulo));
-      var meta = [p.funcao, dataLonga(p.data)].filter(Boolean).join(' · ');
-      if (meta) corpo.appendChild(el('p', 'card-data', meta));
-      if (p.descricao) corpo.appendChild(el('p', 'card-resumo', p.descricao));
-      if (temLink) corpo.appendChild(el('span', 'card-ler', 'Assistir ▶'));
-      c.appendChild(corpo);
-      return c;
+      desenhar();
+      [campoBusca, sel1, sel2].forEach(function (c) { c.addEventListener('input', desenhar); });
     }
 
     // ---------- Aba Matérias de fora ----------
@@ -351,21 +336,44 @@
       carregar('content/programas.json'),
       carregar('content/portfolio.json')
     ]).then(function (res) {
-      TRANSMISSOES = porData(res[0]);
-      var programas = porData(res[1]);
+      var transmissoes = res[0];
+      var programas = res[1];
       var materias = porData(res[2]);
 
-      document.getElementById('n-transmissoes').textContent = '(' + TRANSMISSOES.length + ')';
+      document.getElementById('n-transmissoes').textContent = '(' + transmissoes.length + ')';
       document.getElementById('n-programas').textContent = '(' + programas.length + ')';
       document.getElementById('n-materias').textContent = '(' + materias.length + ')';
 
-      preencherFiltros();
-      desenhar();
-      ['busca', 'f-comp', 'f-func'].forEach(function (id) {
-        document.getElementById(id).addEventListener('input', desenhar);
+      tabelaInterativa({
+        itens: transmissoes,
+        prefixo: 'tx',
+        cab: ['Data', 'Jogo', 'Competição', 'Função'],
+        titulo: function (t) { return t.jogo; },
+        col3: function (t) { return t.competicao; },
+        filtro1: function (t) { return t.competicao; },
+        sub: function (t) {
+          return [t.competicao, (t.esporte && t.esporte !== 'Futebol') ? t.esporte : ''].filter(Boolean).join(' · ');
+        },
+        busca: function (t) { return [t.jogo, t.competicao, t.funcao, t.esporte].join(' '); },
+        singular: ' transmissão',
+        plural: ' transmissões',
+        vazio: 'Nenhuma transmissão encontrada.'
       });
 
-      preencherLista('lista-programas', programas, cartaoPrograma, 'Nenhum programa publicado ainda.');
+      tabelaInterativa({
+        itens: programas,
+        prefixo: 'pg',
+        cab: ['Data', 'Programa', 'Esporte', 'Função'],
+        titulo: function (t) { return t.programa || t.titulo; },
+        col3: function (t) { return t.esporte; },
+        filtro1: function (t) { return t.programa || t.titulo; },
+        sub: function (t) { return t.esporte; },
+        busca: function (t) { return [t.programa || t.titulo, t.esporte, t.funcao].join(' '); },
+        singular: ' participação',
+        plural: ' participações',
+        vazio: 'Nenhum programa encontrado.'
+      });
+
       preencherLista('lista-materias', materias, cartaoMateria, 'Nenhuma matéria publicada ainda.');
     });
   </script>
