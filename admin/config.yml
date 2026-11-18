@@ -94,16 +94,16 @@ collections:
         file: "content/programas.json"
         fields:
           - label: "Programas"
-            label_singular: "Programa"
+            label_singular: "Participação"
             name: "itens"
             widget: "list"
             add_to_top: true
-            summary: "{{fields.titulo}}"
+            summary: "{{fields.data}} · {{fields.programa}}"
             fields:
-              - { label: "Nome do programa ou edição", name: "titulo", widget: "string" }
-              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
-              - { label: "Sua função", name: "funcao", widget: "string", required: false }
-              - { label: "Descrição", name: "descricao", widget: "text", required: false }
+              - { label: "Data", name: "data", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Esporte", name: "esporte", widget: "string", default: "Futebol" }
+              - { label: "Programa", name: "programa", widget: "string" }
+              - { label: "Função (ex.: Comentarista, Apresentador, Repórter, Produtor)", name: "funcao", widget: "string" }
               - { label: "Link do vídeo (YouTube)", name: "link", widget: "string", required: false }
               - { label: "Imagem de capa (só se o link não for do YouTube)", name: "imagem", widget: "image", required: false }
 
