@@ -9,10 +9,11 @@ from urllib.parse import unquote
 
 from PIL import Image, ImageOps
 
-SITE = 'https://borgessfut.com.br'
+SITE = 'https://borgessfut.com.br'  # se o endereço do site mudar, troque só esta linha
 NOME = 'BORGESSFUT'
 AUTOR = 'Por Felipe Borges'
 MESES = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.']
+PAGINAS_FIXAS = ['', 'sobre.html', 'noticias.html', 'alem-do-futebol.html', 'projetos.html', 'portfolio.html', 'contato.html']
 
 
 def e(s):
@@ -105,6 +106,7 @@ PAGINA = Template('''<!DOCTYPE html>
   <base href="/">
   <title>$titulo | $nome</title>
   <link rel="icon" href="logo-site.png">
+  <link rel="canonical" href="$og_url">
   <meta name="description" content="$descricao">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="$nome">
@@ -182,6 +184,19 @@ def montar(n, id_, descricao, tem_og):
     )
 
 
+def gerar_sitemap(urls):
+    linhas = ['<?xml version="1.0" encoding="UTF-8"?>',
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, lastmod in urls:
+        extra = '<lastmod>%s</lastmod>' % lastmod if lastmod else ''
+        linhas.append('  <url><loc>%s</loc>%s</url>' % (html.escape(loc), extra))
+    linhas.append('</urlset>')
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+        f.write('\n'.join(linhas) + '\n')
+    with open('robots.txt', 'w', encoding='utf-8') as f:
+        f.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % SITE)
+
+
 def main():
     with open('content/noticias.json', encoding='utf-8') as f:
         dados = json.load(f)
@@ -189,6 +204,7 @@ def main():
     os.makedirs('noticia', exist_ok=True)
     os.makedirs('og', exist_ok=True)
 
+    urls = [('%s/%s' % (SITE, p), '') for p in PAGINAS_FIXAS]
     vistos = set()
     total = 0
     for n in dados.get('itens', []):
@@ -201,8 +217,12 @@ def main():
         descricao = resumir(primeiro_paragrafo(n.get('texto'))) or n.get('subtitulo') or 'Notícia do BORGESSFUT.'
         with open('noticia/%s.html' % id_, 'w', encoding='utf-8') as f:
             f.write(montar(n, id_, descricao, tem_og))
+
+        data = (n.get('data') or '')[:10]
+        urls.append(('%s/noticia/%s.html' % (SITE, id_), data if re.match(r'^\d{4}-\d{2}-\d{2}$', data) else ''))
         total += 1
 
+    gerar_sitemap(urls)
     print('Páginas de notícias geradas:', total)
 
 
