@@ -1,4 +1,19 @@
 (function () {
+  // ---------- App instalável (PWA) ----------
+  function ligar(tag, atributos) {
+    var e = document.createElement(tag);
+    Object.keys(atributos).forEach(function (k) { e.setAttribute(k, atributos[k]); });
+    document.head.appendChild(e);
+  }
+  if (!document.querySelector('link[rel="manifest"]')) ligar('link', { rel: 'manifest', href: '/manifest.json' });
+  if (!document.querySelector('meta[name="theme-color"]')) ligar('meta', { name: 'theme-color', content: '#0181f3' });
+  if (!document.querySelector('link[rel="apple-touch-icon"]')) ligar('link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' });
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').catch(function () {});
+    });
+  }
+
   // Endereços das redes sociais: troque aqui se algum for diferente
   var redes = {
     instagram: 'https://www.instagram.com/borgessfut/',
@@ -42,7 +57,7 @@
     cab.outerHTML =
       '<header>' +
         '<a href="index.html" class="marca">' +
-                  '<img src="logo-site.png" alt="Logo BORGESSFUT">' +
+          '<img src="logo-site.png" alt="Logo BORGESSFUT">' +
           '<span>BORGESSFUT</span>' +
         '</a>' +
         '<button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false">' +
@@ -70,5 +85,40 @@
         '<div class="redes">' + botoesRedes() + '</div>' +
         '<p>© BORGESSFUT</p>' +
       '</footer>';
+  }
+
+  // ---------- Botão "Instalar o app" no rodapé ----------
+  var rodape = document.querySelector('footer');
+  var instalado = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if (rodape && !instalado) {
+    var copia = rodape.querySelector('p');
+    var pedido = null;
+
+    var botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'btn-instalar';
+    botao.hidden = true;
+    botao.textContent = 'Instalar o app do BORGESSFUT';
+    rodape.insertBefore(botao, copia);
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      pedido = e;
+      botao.hidden = false;
+    });
+    botao.addEventListener('click', function () {
+      if (!pedido) return;
+      pedido.prompt();
+      pedido.userChoice.then(function () { pedido = null; botao.hidden = true; });
+    });
+    window.addEventListener('appinstalled', function () { botao.hidden = true; });
+
+    // iPhone e iPad não têm o botão automático
+    if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+      var dica = document.createElement('p');
+      dica.className = 'dica-instalar';
+      dica.textContent = 'No iPhone: toque em Compartilhar e depois em "Adicionar à Tela de Início".';
+      rodape.insertBefore(dica, copia);
+    }
   }
 })();
