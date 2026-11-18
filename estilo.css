@@ -926,3 +926,19 @@ footer { margin-top: auto; }
   .destaque { gap: 18px; }
   .destaque-texto { padding: 4px 4px 8px; }
 }
+/* Botão e dica de instalar o app */
+.btn-instalar {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 8px 18px;
+  margin: 0 0 14px;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+.btn-instalar:hover { background: rgba(255, 255, 255, 0.18); }
+.btn-instalar[hidden] { display: none; }
+.dica-instalar { margin: 0 0 12px; font-size: 14px; opacity: 0.9; }
