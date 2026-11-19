@@ -1,4 +1,12 @@
 (function () {
+    // Sempre confirmar com o servidor se os dados do painel mudaram (evita ver notícia antiga)
+  var fetchOriginal = window.fetch;
+  window.fetch = function (url, opcoes) {
+    if (typeof url === 'string' && url.indexOf('content/') === 0) {
+      opcoes = Object.assign({ cache: 'no-cache' }, opcoes || {});
+    }
+    return fetchOriginal.call(this, url, opcoes);
+  };
   // ---------- App instalável (PWA) ----------
   function ligar(tag, atributos) {
     var e = document.createElement(tag);
