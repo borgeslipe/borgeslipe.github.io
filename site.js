@@ -121,4 +121,86 @@
       rodape.insertBefore(dica, copia);
     }
   }
+
+  // ---------- Botões de compartilhar (notícias) ----------
+  window.adicionarCompartilhar = function (alvo) {
+    if (!alvo || alvo.querySelector('.compartilhar')) return;
+
+    var h1 = alvo.querySelector('h1');
+    var titulo = h1 ? h1.textContent : document.title;
+    var n = new URLSearchParams(location.search).get('n');
+    var url = location.origin + location.pathname + (n ? '?n=' + n : '');
+
+    var barra = document.createElement('div');
+    barra.className = 'compartilhar';
+
+    var rotulo = document.createElement('span');
+    rotulo.className = 'compartilhar-rotulo';
+    rotulo.textContent = 'Compartilhar:';
+    barra.appendChild(rotulo);
+
+    var wpp = document.createElement('a');
+    wpp.className = 'botao-share wpp';
+    wpp.textContent = 'WhatsApp';
+    wpp.href = 'https://wa.me/?text=' + encodeURIComponent(titulo + '\n' + url);
+    wpp.target = '_blank';
+    wpp.rel = 'noopener';
+    barra.appendChild(wpp);
+
+    var copiar = document.createElement('button');
+    copiar.type = 'button';
+    copiar.className = 'botao-share';
+    copiar.textContent = 'Copiar link';
+    copiar.addEventListener('click', function () {
+      function feito() {
+        copiar.textContent = 'Link copiado ✓';
+        setTimeout(function () { copiar.textContent = 'Copiar link'; }, 2000);
+      }
+      function antigo() {
+        var t = document.createElement('textarea');
+        t.value = url;
+        t.style.position = 'fixed';
+        t.style.opacity = '0';
+        document.body.appendChild(t);
+        t.select();
+        try { document.execCommand('copy'); feito(); } catch (e) { window.prompt('Copie o link:', url); }
+        document.body.removeChild(t);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(feito, antigo);
+      } else {
+        antigo();
+      }
+    });
+    barra.appendChild(copiar);
+
+    if (navigator.share) {
+      var mais = document.createElement('button');
+      mais.type = 'button';
+      mais.className = 'botao-share';
+      mais.textContent = 'Mais opções';
+      mais.addEventListener('click', function () {
+        navigator.share({ title: titulo, url: url }).catch(function () {});
+      });
+      barra.appendChild(mais);
+    }
+
+    alvo.appendChild(barra);
+  };
+
+  // Coloca os botões no fim da notícia, tanto nas páginas geradas pelo robô
+  // quanto na leitura antiga (noticias.html?n=...), que monta a notícia depois de carregar.
+  function tentarCompartilhar() {
+    var art = document.querySelector('.artigo');
+    if (art && art.querySelector('h1')) window.adicionarCompartilhar(art);
+  }
+  tentarCompartilhar();
+  var areaNoticia = document.getElementById('area');
+  if (areaNoticia && window.MutationObserver) {
+    var espera = null;
+    new MutationObserver(function () {
+      clearTimeout(espera);
+      espera = setTimeout(tentarCompartilhar, 250);
+    }).observe(areaNoticia, { childList: true });
+  }
 })();
