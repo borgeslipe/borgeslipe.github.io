@@ -942,3 +942,35 @@ footer { margin-top: auto; }
 .btn-instalar:hover { background: rgba(255, 255, 255, 0.18); }
 .btn-instalar[hidden] { display: none; }
 .dica-instalar { margin: 0 0 12px; font-size: 14px; opacity: 0.9; }
+/* Botões de compartilhar nas notícias */
+.compartilhar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid #d3e4f7;
+}
+.compartilhar-rotulo {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #0a2f57;
+  margin-right: 4px;
+}
+.botao-share {
+  display: inline-block;
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 8px 18px;
+  border: 2px solid var(--azul);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--azul-escuro);
+  cursor: pointer;
+}
+.botao-share:hover { background: var(--azul-claro); }
+.botao-share.wpp { background: #013a75; border-color: #013a75; color: #ffffff; }
+.botao-share.wpp:hover { background: #0160b5; border-color: #0160b5; }
