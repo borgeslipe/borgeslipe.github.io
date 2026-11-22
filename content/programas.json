@@ -2,6 +2,69 @@
   "itens": [
     {
       "esporte": "Futebol",
+      "data": "2026-07-20",
+      "programa": "Bem, Alunos!",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=GKfQLONOk3I"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-18",
+      "programa": "Bem, Alunos!",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=Cv3UxP12Ot8"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-13",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=7fosNY0fnPo"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-12",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=7fosNY0fnPo"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-11",
+      "programa": "Bem, Alunos!",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=VTRKVCwf3vo"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-10",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=7Yh8lVxeDv0"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-07",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=K12JdYAlu8I"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-06",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=P9CuaRsrBZI"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-07-01",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=uEejkwXxpqI"
+    },
+    {
+      "esporte": "Futebol",
       "programa": "Bem, Alunos!",
       "funcao": "Comentarista",
       "link": "https://www.youtube.com/watch?v=3XuicH1YhFE",
