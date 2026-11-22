@@ -974,3 +974,34 @@ footer { margin-top: auto; }
 .botao-share:hover { background: var(--azul-claro); }
 .botao-share.wpp { background: #013a75; border-color: #013a75; color: #ffffff; }
 .botao-share.wpp:hover { background: #0160b5; border-color: #0160b5; }
+/* Sobre: foto e nome do autor */
+.quem-faz {
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.quem-faz .quem-faz-texto h2 { margin-top: 0; }
+.foto-autor { margin: 0; }
+.foto-autor img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 10px 28px rgba(1, 96, 181, 0.22);
+}
+.foto-autor figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; }
+.foto-autor strong {
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1.1;
+  color: #0a2f57;
+}
+.foto-autor a { color: var(--azul-escuro); font-weight: 700; }
+.foto-autor a:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+  .quem-faz { grid-template-columns: 1fr; gap: 22px; }
+  .foto-autor { max-width: 340px; }
+}
