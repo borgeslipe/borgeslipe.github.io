@@ -2,6 +2,27 @@
   "itens": [
     {
       "esporte": "Futebol",
+      "data": "2026-11-16",
+      "programa": "Bem, Alunos!",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=FTCO1-JNWW4"
+    },
+    {
+      "esporte": "Olimpíadas",
+      "programa": "Lab Olímpico #10",
+      "funcao": "Repórter",
+      "link": "https://www.youtube.com/watch?v=wAK5n0uiN7U",
+      "data": "2026-10-29"
+    },
+    {
+      "esporte": "Futebol",
+      "programa": "Cobertura Bola de Ouro 2026",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=Ku6bBtoe-AU",
+      "data": "2026-10-26"
+    },
+    {
+      "esporte": "Futebol",
       "data": "2026-10-19",
       "programa": "Bem, Alunos!",
       "funcao": "Apresentador",
