@@ -2,6 +2,41 @@
   "itens": [
     {
       "esporte": "Futebol",
+      "data": "2026-08-31",
+      "programa": "Bem, Alunos!",
+      "funcao": "Apresentador",
+      "link": "https://www.youtube.com/watch?v=qnpmUMEJy20"
+    },
+    {
+      "esporte": "Olimpíadas",
+      "programa": "Lab Olímpico #08",
+      "funcao": "Repórter",
+      "link": "https://www.youtube.com/watch?v=zvAVkciTSvQ",
+      "data": "2026-08-27"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-08-10",
+      "programa": "Bem, Alunos!",
+      "funcao": "Comentarista",
+      "link": "https://www.youtube.com/watch?v=IEg6hO-ZAtI"
+    },
+    {
+      "esporte": "Futebol",
+      "data": "2026-08-03",
+      "programa": "Bem, Alunos",
+      "funcao": "Produtor",
+      "link": "https://www.youtube.com/watch?v=oW5qQbFUW78"
+    },
+    {
+      "esporte": "Olimpíadas",
+      "data": "2026-07-30",
+      "programa": "Lab Olímpico #07",
+      "funcao": "Repórter",
+      "link": "https://www.youtube.com/watch?v=OcW8Xh5Sh80"
+    },
+    {
+      "esporte": "Futebol",
       "data": "2026-07-20",
       "programa": "Bem, Alunos!",
       "funcao": "Apresentador",
